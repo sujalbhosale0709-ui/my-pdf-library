@@ -127,7 +127,7 @@ button {
 
 </div>
 
-<!-- नवीन Google Form साठी बॅकग्राउंड फॉर्म -->
+<!-- Google Form बॅकग्राउंड सबमिशन -->
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 <form id="gform" action="https://docs.google.com/forms/d/e/1FAIpQLSdA-51SyTkuRkT740k06N_Ou4-32FierqlNwbwPv_GynmXP-w/formResponse" method="POST" target="hidden_iframe" style="display:none;">
   <input type="text" name="entry.1488944512" id="gname">
@@ -157,7 +157,7 @@ function login() {
     return;
   }
 
-  // नवीन गुगल फॉर्ममध्ये व्हॅल्यू भरून सबमिट करणे
+  // Google Form मध्ये डेटा पाठवणे
   document.getElementById("gname").value = name;
   document.getElementById("gmobile").value = mobile;
   document.getElementById("gform").submit();
@@ -173,8 +173,8 @@ function openFolder(folder) {
   let files = {
     engineering: [
       { 
-        title: "Chemistry Model Question Paper", 
-        url: "https://github.com/sujalbhosale0709-ui/my-pdf-library/edit/main/Chemistry%202024%20pattern%20model%20question%20paper.pdf" 
+        title: "Chemistry 2024 Pattern Model Question Paper", 
+        url: "https://raw.githubusercontent.com/sujalbhosale0709-ui/my-pdf-library/main/Chemistry%202024%20pattern%20model%20question%20paper.pdf" 
       }
     ],
     assignment: [],
