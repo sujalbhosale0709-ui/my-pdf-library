@@ -44,4 +44,247 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 /* Video Cards */
 .video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; text-decoration: none; color: white; margin-bottom: 15px; display: block; }
-.video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 4
+.video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
+.video-info { padding: 12px; font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LOGIN PAGE -->
+  <div id="login-section">
+    <div class="header-box">
+      <h1>📚 Digital Portal</h1>
+      <p>तुमचे नाव, मोबाईल आणि पासवर्ड टाकून लॉगिन करा</p>
+    </div>
+    <div class="input-group">
+      <label>पूर्ण नाव</label>
+      <input id="userName" type="text" placeholder="उदा. Sujal Bhosle">
+    </div>
+    <div class="input-group">
+      <label>मोबाईल नंबर</label>
+      <input id="userMobile" type="tel" maxlength="10" placeholder="10 अंकी मोबाईल नंबर">
+    </div>
+    <div class="input-group">
+      <label>पासवर्ड</label>
+      <input id="userPass" type="password" placeholder="पासवर्ड टाका">
+    </div>
+    <button class="btn-primary" onclick="handleLogin()">लॉगिन करा →</button>
+  </div>
+
+  <!-- DASHBOARD SECTION -->
+  <div id="dashboard-section">
+    <div class="user-bar">
+      <span id="welcomeText">Welcome!</span>
+      <button class="btn-logout" onclick="handleLogout()">Logout</button>
+    </div>
+
+    <!-- MAIN MENU (४ मुख्य फोल्डर्स) -->
+    <div id="main-menu">
+      <div class="header-box" style="margin-bottom: 15px;">
+        <h2 style="font-size: 20px; color: #cbd5e1;">मुख्य विभाग</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card-folder" onclick="openSection('sec-websites')">
+          <span class="icon">🌐</span>
+          <span class="title">विविध Websites</span>
+        </div>
+        <div class="card-folder" onclick="openSection('sec-nokari')">
+          <span class="icon">💼</span>
+          <span class="title">नोकरी विभाग</span>
+        </div>
+        <div class="card-folder" onclick="openSection('sec-youtube')">
+          <span class="icon">▶️</span>
+          <span class="title">YouTube Saved Video Link</span>
+        </div>
+        <div class="card-folder" onclick="openSection('sec-instagram')">
+          <span class="icon">📸</span>
+          <span class="title">Instagram Saved Video Links</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: विविध WEBSITES (२२ सब-फोल्डर्स) -->
+    <div id="sec-websites" class="sub-page">
+      <div class="top-nav">
+        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <span class="page-heading">🌐 विविध Websites</span>
+      </div>
+      <div class="grid-2">
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📑</span><span class="title">PF Service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">✏️</span><span class="title">Pdf edit / light Pdf</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🎓</span><span class="title">MahaDBT 2.0</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🪪</span><span class="title">आधार all service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">💳</span><span class="title">PAN all service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🗳️</span><span class="title">Voter all service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📂</span><span class="title">DigiLocker</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🏛️</span><span class="title">महा सारथी</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🌾</span><span class="title">Ration Card service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">👷</span><span class="title">कामगार योजना</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">⛏️</span><span class="title">मनरेगा योजना</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📜</span><span class="title">Caste Validity website</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📊</span><span class="title">मार्कशीट service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🚗</span><span class="title">DL Licence</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🏫</span><span class="title">DBATU University</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📄</span><span class="title">Multiple Pages per Page</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📑</span><span class="title">All Pdf Service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🖼️</span><span class="title">Passport Photo Maker</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📚</span><span class="title">YCMOU Service</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🎬</span><span class="title">HDHub4u Movies</span></a>
+      </div>
+    </div>
+
+    <!-- SECTION 2: नोकरी विभाग (७ सब-फोल्डर्स) -->
+    <div id="sec-nokari" class="sub-page">
+      <div class="top-nav">
+        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <span class="page-heading">💼 नोकरी विभाग</span>
+      </div>
+      <div class="grid-2">
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🏥</span><span class="title">आरोग्य विभाग</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📑</span><span class="title">Combine Group B & C</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🚆</span><span class="title">RRB Railway</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">📢</span><span class="title">इतर भरती</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">⚙️</span><span class="title">इंजिनिअरिंग विभाग</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🔬</span><span class="title">B.Sc विभाग</span></a>
+        <a class="card-folder" href="#" target="_blank"><span class="icon">🩺</span><span class="title">SI विभाग</span></a>
+      </div>
+    </div>
+
+    <!-- SECTION 3: YouTube Saved Video Link -->
+    <div id="sec-youtube" class="sub-page">
+      <div class="top-nav">
+        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <span class="page-heading">▶️ YouTube Videos</span>
+      </div>
+      <div>
+        <a class="video-card" href="#" target="_blank">
+          <div class="video-thumb">▶️</div>
+          <div class="video-info">YouTube Saved Video 1 (Link नंतर जोडू)</div>
+        </a>
+        <a class="video-card" href="#" target="_blank">
+          <div class="video-thumb">▶️</div>
+          <div class="video-info">YouTube Saved Video 2 (Link नंतर जोडू)</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Instagram Saved Video Links -->
+    <div id="sec-instagram" class="sub-page">
+      <div class="top-nav">
+        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <span class="page-heading">📸 Instagram Videos</span>
+      </div>
+      <div>
+        <a class="video-card" href="#" target="_blank">
+          <div class="video-thumb">📸</div>
+          <div class="video-info">Instagram Reel / Video 1 (Link नंतर जोडू)</div>
+        </a>
+        <a class="video-card" href="#" target="_blank">
+          <div class="video-thumb">📸</div>
+          <div class="video-info">Instagram Reel / Video 2 (Link नंतर जोडू)</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Google Forms Silent Submission -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+<form id="gform" action="https://docs.google.com/forms/d/e/1FAIpQLSdA-51SyTkuRkT740k06N_Ou4-32FierqlNwbwPv_GynmXP-w/formResponse" method="POST" target="hidden_iframe" style="display:none;">
+  <input type="text" name="entry.1488944512" id="gname">
+  <input type="text" name="entry.494704437" id="gmobile">
+</form>
+
+<script>
+const FIXED_PASS = "Sun@0909";
+
+// सुरक्षित लोड फंक्शन
+document.addEventListener("DOMContentLoaded", function() {
+  const savedUser = localStorage.getItem("loggedInUser");
+  if (savedUser) {
+    showDashboard(savedUser);
+  } else {
+    document.getElementById("login-section").style.display = "block";
+    document.getElementById("dashboard-section").style.display = "none";
+  }
+});
+
+function handleLogin() {
+  const name = document.getElementById("userName").value.trim();
+  const mobile = document.getElementById("userMobile").value.trim();
+  const pass = document.getElementById("userPass").value;
+
+  if(!name || !mobile || !pass) {
+    alert("कृपया सर्व माहिती भरा!");
+    return;
+  }
+  if(!/^[0-9]{10}$/.test(mobile)) {
+    alert("कृपया योग्य 10-अंकी मोबाईल नंबर टाका!");
+    return;
+  }
+  if(pass !== FIXED_PASS) {
+    alert("चुकीचा पासवर्ड! पुन्हा प्रयत्न करा.");
+    return;
+  }
+
+  // Google Form submission
+  try {
+    document.getElementById("gname").value = name;
+    document.getElementById("gmobile").value = mobile;
+    document.getElementById("gform").submit();
+  } catch(e) {
+    console.error(e);
+  }
+
+  // Browser मध्ये लॉगिन सेव्ह करणे
+  localStorage.setItem("loggedInUser", name);
+
+  // Show Dashboard
+  showDashboard(name);
+}
+
+function showDashboard(name) {
+  document.getElementById("welcomeText").innerText = "स्वागत आहे, " + name + "!";
+  document.getElementById("login-section").style.display = "none";
+  document.getElementById("dashboard-section").style.display = "block";
+  backToMain();
+}
+
+function handleLogout() {
+  localStorage.removeItem("loggedInUser");
+  document.getElementById("userName").value = "";
+  document.getElementById("userMobile").value = "";
+  document.getElementById("userPass").value = "";
+  document.getElementById("dashboard-section").style.display = "none";
+  document.getElementById("login-section").style.display = "block";
+}
+
+function openSection(sectionId) {
+  document.getElementById("main-menu").style.display = "none";
+  const pages = document.getElementsByClassName("sub-page");
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].style.display = "none";
+  }
+  const target = document.getElementById(sectionId);
+  if(target) {
+    target.style.display = "block";
+  }
+}
+
+function backToMain() {
+  const pages = document.getElementsByClassName("sub-page");
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].style.display = "none";
+  }
+  document.getElementById("main-menu").style.display = "block";
+}
+</script>
+
+</body>
+</html>
