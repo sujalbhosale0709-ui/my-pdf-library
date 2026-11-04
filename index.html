@@ -80,7 +80,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       <button class="btn-logout" onclick="handleLogout()">Logout</button>
     </div>
 
-    <!-- MAIN MENU (४ मुख्य फोल्डर्स) -->
+    <!-- MAIN MENU (४ मुख्य विभाग) -->
     <div id="main-menu">
       <div class="header-box" style="margin-bottom: 15px;">
         <h2 style="font-size: 20px; color: #cbd5e1;">मुख्य विभाग</h2>
@@ -200,7 +200,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="navTo('https://www.cutout.pro/passport-photo-maker/upload')">
           <span class="icon">🖼️</span><span class="title">Passport Photo Maker</span>
         </div>
-        <!-- 23. HDHub4u -->
+        <!-- 23. HDHub4u Movies -->
         <div class="card-folder" onclick="openSection('sec-hdhub')">
           <span class="icon">🎬</span><span class="title">HDHub4u Movies</span>
         </div>
@@ -233,7 +233,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="navTo('https://hdhub4u.deal/')">
           <span class="icon">🌐</span><span class="title">HDHub4u</span>
         </div>
-        <div class="card-folder" onclick="alert('Downloads Movie लवकरच जोडले जाईल!')">
+        <div class="card-folder" onclick="void(0)">
           <span class="icon">📥</span><span class="title">Downloads Movie</span>
         </div>
       </div>
@@ -381,7 +381,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- इंजिनिअरिंग विषय सब-फोल्डर्स -->
     <div id="sec-engg-m1" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📐 M1</span></div>
       <div class="grid-2">
@@ -483,7 +482,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- SECTION 4: Instagram Saved Video Links (नवीन ५ सब-फोल्डर्स) -->
+    <!-- SECTION 4: Instagram Saved Video Links -->
     <div id="sec-instagram" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -513,8 +512,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- इन्स्टाग्राम ५ फोल्डर्सचे स्वतंत्र व्हिडिओ बॉक्सेस -->
-    <!-- १. ऑडिओ व्हिडिओज -->
+    <!-- इन्स्टाग्राम ५ फोल्डर्सचे व्हिडिओज -->
     <div id="sec-insta-audio" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -525,14 +523,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
           <div class="video-thumb">🎵</div>
           <div class="video-info">Audio Video 1 (Link नंतर जोडू)</div>
         </div>
-        <div class="video-card">
-          <div class="video-thumb">🎵</div>
-          <div class="video-info">Audio Video 2 (Link नंतर जोडू)</div>
-        </div>
       </div>
     </div>
 
-    <!-- २. ड्रेस व्हिडिओज -->
     <div id="sec-insta-dress" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -543,14 +536,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
           <div class="video-thumb">👔</div>
           <div class="video-info">Dress Video 1 (Link नंतर जोडू)</div>
         </div>
-        <div class="video-card">
-          <div class="video-thumb">👔</div>
-          <div class="video-info">Dress Video 2 (Link नंतर जोडू)</div>
-        </div>
       </div>
     </div>
 
-    <!-- ३. समथिंग व्हिडिओज -->
     <div id="sec-insta-something" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -561,14 +549,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
           <div class="video-thumb">✨</div>
           <div class="video-info">Something Video 1 (Link नंतर जोडू)</div>
         </div>
-        <div class="video-card">
-          <div class="video-thumb">✨</div>
-          <div class="video-info">Something Video 2 (Link नंतर जोडू)</div>
-        </div>
       </div>
     </div>
 
-    <!-- ४. जिम व्हिडिओज -->
     <div id="sec-insta-gym" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -579,14 +562,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
           <div class="video-thumb">🏋️‍♂️</div>
           <div class="video-info">Gym Video 1 (Link नंतर जोडू)</div>
         </div>
-        <div class="video-card">
-          <div class="video-thumb">🏋️‍♂️</div>
-          <div class="video-info">Gym Video 2 (Link नंतर जोडू)</div>
-        </div>
       </div>
     </div>
 
-    <!-- ५. कार व्हिडिओज -->
     <div id="sec-insta-car" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -596,10 +574,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="video-card">
           <div class="video-thumb">🚗</div>
           <div class="video-info">Car Video 1 (Link नंतर जोडू)</div>
-        </div>
-        <div class="video-card">
-          <div class="video-thumb">🚗</div>
-          <div class="video-info">Car Video 2 (Link नंतर जोडू)</div>
         </div>
       </div>
     </div>
@@ -616,9 +590,8 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 </form>
 
 <script>
-const FIXED_PASS = "Sun@0909";
+var FIXED_PASS = "Sun@0909";
 
-// नवीन टॅबमध्ये लिंक उघडणे
 function navTo(url) {
   if (url) {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -626,7 +599,7 @@ function navTo(url) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  const savedUser = localStorage.getItem("loggedInUser");
+  var savedUser = localStorage.getItem("loggedInUser");
   if (savedUser) {
     showDashboard(savedUser);
   } else {
@@ -636,9 +609,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function handleLogin() {
-  const name = document.getElementById("userName").value.trim();
-  const mobile = document.getElementById("userMobile").value.trim();
-  const pass = document.getElementById("userPass").value;
+  var name = document.getElementById("userName").value.trim();
+  var mobile = document.getElementById("userMobile").value.trim();
+  var pass = document.getElementById("userPass").value;
 
   if(!name || !mobile || !pass) {
     alert("कृपया सर्व माहिती भरा!");
@@ -657,9 +630,7 @@ function handleLogin() {
     document.getElementById("gname").value = name;
     document.getElementById("gmobile").value = mobile;
     document.getElementById("gform").submit();
-  } catch(e) {
-    console.error(e);
-  }
+  } catch(e) {}
 
   localStorage.setItem("loggedInUser", name);
   showDashboard(name);
@@ -682,14 +653,14 @@ function handleLogout() {
   document.getElementById("login-section").style.display = "block";
 }
 
-// फोल्डर उघडणे आणि ब्राउझर हिस्टरीमध्ये नोंद करणे
-function openSection(sectionId, pushState = true) {
+function openSection(sectionId, pushState) {
+  if (typeof pushState === 'undefined') pushState = true;
   document.getElementById("main-menu").style.display = "none";
-  const pages = document.getElementsByClassName("sub-page");
-  for (let i = 0; i < pages.length; i++) {
+  var pages = document.getElementsByClassName("sub-page");
+  for (var i = 0; i < pages.length; i++) {
     pages[i].style.display = "none";
   }
-  const target = document.getElementById(sectionId);
+  var target = document.getElementById(sectionId);
   if(target) {
     target.style.display = "block";
     if (pushState) {
@@ -698,10 +669,10 @@ function openSection(sectionId, pushState = true) {
   }
 }
 
-// मुख्य मेनूवर परत जाणे
-function backToMain(pushState = true) {
-  const pages = document.getElementsByClassName("sub-page");
-  for (let i = 0; i < pages.length; i++) {
+function backToMain(pushState) {
+  if (typeof pushState === 'undefined') pushState = true;
+  var pages = document.getElementsByClassName("sub-page");
+  for (var i = 0; i < pages.length; i++) {
     pages[i].style.display = "none";
   }
   document.getElementById("main-menu").style.display = "block";
@@ -710,9 +681,8 @@ function backToMain(pushState = true) {
   }
 }
 
-// मोबाईलच्या मूळ Back बटनाने मागील पेजवर जाणे
 window.onpopstate = function(event) {
-  const savedUser = localStorage.getItem("loggedInUser");
+  var savedUser = localStorage.getItem("loggedInUser");
   if (!savedUser) return;
 
   if (event.state && event.state.section) {
