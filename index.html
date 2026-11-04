@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Digital Library</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b132b; color: #ffffff; min-height: 100vh; padding: 20px 10px; }
 .container { max-width: 500px; margin: 0 auto; }
 
@@ -31,10 +31,10 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 /* Grid Layouts */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; transition: transform 0.15s, background 0.15s; text-decoration: none; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.card-folder:hover { transform: translateY(-3px); background: #233154; border-color: #48cae4; }
-.card-folder .icon { font-size: 32px; margin-bottom: 8px; }
-.card-folder .title { font-size: 14px; font-weight: 600; line-height: 1.3; }
+.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; transition: transform 0.15s, background 0.15s; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; }
+.card-folder:active { transform: scale(0.96); background: #233154; border-color: #48cae4; }
+.card-folder .icon { font-size: 32px; margin-bottom: 8px; pointer-events: none; }
+.card-folder .title { font-size: 14px; font-weight: 600; line-height: 1.3; pointer-events: none; }
 
 /* Sub Pages */
 .sub-page { display: none; }
@@ -43,7 +43,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .page-heading { font-size: 18px; color: #48cae4; font-weight: bold; }
 
 /* Video Cards */
-.video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; text-decoration: none; color: white; margin-bottom: 15px; display: block; }
+.video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; }
 .video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
 .video-info { padding: 12px; font-size: 15px; font-weight: 600; }
 </style>
@@ -105,63 +105,101 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- SECTION 1: विविध WEBSITES (२२ सब-फोल्डर्स लिंक्ससहित) -->
+    <!-- SECTION 1: विविध WEBSITES (२२ सब-फोल्डर्स) -->
     <div id="sec-websites" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="backToMain()">← Back</button>
         <span class="page-heading">🌐 विविध Websites</span>
       </div>
       <div class="grid-2">
-        <!-- 1. IRCTC Railway Ticket booking -->
-        <a class="card-folder" href="https://www.irctc.co.in/eticket/booking/train-list" target="_blank"><span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span></a>
-        <!-- 2. Aadhar Service -->
-        <a class="card-folder" href="https://tathya.uidai.gov.in/access/login?role=resident" target="_blank"><span class="icon">🪪</span><span class="title">आधार Service</span></a>
-        <!-- 3. PAN Service -->
-        <a class="card-folder" href="https://onlineservices.proteantech.in/paam/endUserRegisterContact.html" target="_blank"><span class="icon">💳</span><span class="title">PAN Service</span></a>
-        <!-- 4. Voter Service -->
-        <a class="card-folder" href="https://voters.eci.gov.in/login" target="_blank"><span class="icon">🗳️</span><span class="title">Voter Service</span></a>
-        <!-- 5. Maha ID / महा सारथी -->
-        <a class="card-folder" href="https://mahaone.maharashtra.gov.in/emIDAM/username.html?resid=7554" target="_blank"><span class="icon">🏛️</span><span class="title">महा सारथी</span></a>
-        <!-- 6. Driving Licence Service -->
-        <a class="card-folder" href="https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do" target="_blank"><span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span></a>
-        <!-- 7. MahaDBT 2.0 -->
-        <a class="card-folder" href="https://mahaone.maharashtra.gov.in/emIDAM/username.html?resid=893" target="_blank"><span class="icon">🎓</span><span class="title">MahaDBT 2.0</span></a>
-        <!-- 8. Ration Card -->
-        <a class="card-folder" href="https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx" target="_blank"><span class="icon">🌾</span><span class="title">Ration Card Service</span></a>
-        <!-- 9. मनरेगा -->
-        <a class="card-folder" href="https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels" target="_blank"><span class="icon">⛏️</span><span class="title">मनरेगा योजना</span></a>
-        <!-- 10. कामगार योजना -->
-        <a class="card-folder" href="https://mahabocw.in/en/" target="_blank"><span class="icon">👷</span><span class="title">कामगार योजना</span></a>
-        <!-- 11. DigiLocker -->
-        <a class="card-folder" href="https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en" target="_blank"><span class="icon">📂</span><span class="title">DigiLocker</span></a>
-        <!-- 12. Marksheet -->
-        <a class="card-folder" href="https://boardmarksheet.maharashtra.gov.in/emarksheet/" target="_blank"><span class="icon">📊</span><span class="title">मार्कशीट Service</span></a>
-        <!-- 13. शेती कागदपत्रे -->
-        <a class="card-folder" href="https://digitalsatbara.mahabhumi.gov.in/dslr" target="_blank"><span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span></a>
-        <!-- 14. PF Service -->
-        <a class="card-folder" href="https://unifiedportal-mem.epfindia.gov.in/memberinterface/" target="_blank"><span class="icon">📑</span><span class="title">PF Service</span></a>
-        <!-- 15. Caste Validity -->
-        <a class="card-folder" href="https://cvc.barti.in/home" target="_blank"><span class="icon">📜</span><span class="title">Caste Validity</span></a>
-        <!-- 16. DBATU University -->
-        <a class="card-folder" href="https://u27342909.ct.sendgrid.net/ls/click?upn=u001.nwvd-2FCtPux50-2BkufzRNz4b2bKTiijGEuWnR8QFzWCWbqTuXKZWQh5eJAzMkHH1EfAVbY_ZeZkPPKGpocOXnC6pCili6lWA1jwF9qfKLfLoDFnk1H96rIdndNv-2F3cOAPJO3XnYRS3NYjNkxazHiR-2BN7nAo7N3h1atz52vG0zytH96yyh2BKXAYO1yAzPaK5SE-2FPFrIM2nfHg9EYs5j6O0aVybF-2BrL5pDHJbViT23-2FKF2qwtce5IdFg6LOPx7i0p0iI58E55SwdvpyktG8Idci9AcJ4Vw-3D-3D" target="_blank"><span class="icon">🏫</span><span class="title">DBATU University</span></a>
-        <!-- 17. YCMOU (सब-फोल्डर्स उघडणारे) -->
+        <!-- 0. IRCTC Railway Ticket booking -->
+        <div class="card-folder" onclick="goToLink('https://www.irctc.co.in/eticket/booking/train-list')">
+          <span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span>
+        </div>
+        <!-- 1. Aadhar Service -->
+        <div class="card-folder" onclick="goToLink('https://tathya.uidai.gov.in/access/login?role=resident')">
+          <span class="icon">🪪</span><span class="title">आधार Service</span>
+        </div>
+        <!-- 2. PAN Service -->
+        <div class="card-folder" onclick="goToLink('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')">
+          <span class="icon">💳</span><span class="title">PAN Service</span>
+        </div>
+        <!-- 3. Voter Service -->
+        <div class="card-folder" onclick="goToLink('https://voters.eci.gov.in/login')">
+          <span class="icon">🗳️</span><span class="title">Voter Service</span>
+        </div>
+        <!-- 4. Maha ID / महा सारथी -->
+        <div class="card-folder" onclick="goToLink('https://mahaone.maharashtra.gov.in/emIDAM/username.html?resid=7554')">
+          <span class="icon">🏛️</span><span class="title">महा सारथी</span>
+        </div>
+        <!-- 5. Driving Licence Service -->
+        <div class="card-folder" onclick="goToLink('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')">
+          <span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span>
+        </div>
+        <!-- 6. MahaDBT 2.0 -->
+        <div class="card-folder" onclick="goToLink('https://mahaone.maharashtra.gov.in/emIDAM/username.html?resid=893')">
+          <span class="icon">🎓</span><span class="title">MahaDBT 2.0</span>
+        </div>
+        <!-- 7. Ration Card -->
+        <div class="card-folder" onclick="goToLink('https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx')">
+          <span class="icon">🌾</span><span class="title">Ration Card Service</span>
+        </div>
+        <!-- 8. मनरेगा -->
+        <div class="card-folder" onclick="goToLink('https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels')">
+          <span class="icon">⛏️</span><span class="title">मनरेगा योजना</span>
+        </div>
+        <!-- 9. कामगार योजना -->
+        <div class="card-folder" onclick="goToLink('https://mahabocw.in/en/')">
+          <span class="icon">👷</span><span class="title">कामगार योजना</span>
+        </div>
+        <!-- 10. DigiLocker -->
+        <div class="card-folder" onclick="goToLink('https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en')">
+          <span class="icon">📂</span><span class="title">DigiLocker</span>
+        </div>
+        <!-- 11. Marksheet -->
+        <div class="card-folder" onclick="goToLink('https://boardmarksheet.maharashtra.gov.in/emarksheet/')">
+          <span class="icon">📊</span><span class="title">मार्कशीट Service</span>
+        </div>
+        <!-- 12. शेती कागदपत्रे -->
+        <div class="card-folder" onclick="goToLink('https://digitalsatbara.mahabhumi.gov.in/dslr')">
+          <span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span>
+        </div>
+        <!-- 13. PF Service -->
+        <div class="card-folder" onclick="goToLink('https://unifiedportal-mem.epfindia.gov.in/memberinterface/')">
+          <span class="icon">📑</span><span class="title">PF Service</span>
+        </div>
+        <!-- 14. Caste Validity -->
+        <div class="card-folder" onclick="goToLink('https://cvc.barti.in/home')">
+          <span class="icon">📜</span><span class="title">Caste Validity</span>
+        </div>
+        <!-- 15. DBATU University -->
+        <div class="card-folder" onclick="goToLink('https://u27342909.ct.sendgrid.net/ls/click?upn=u001.nwvd-2FCtPux50-2BkufzRNz4b2bKTiijGEuWnR8QFzWCWbqTuXKZWQh5eJAzMkHH1EfAVbY_ZeZkPPKGpocOXnC6pCili6lWA1jwF9qfKLfLoDFnk1H96rIdndNv-2F3cOAPJO3XnYRS3NYjNkxazHiR-2BN7nAo7N3h1atz52vG0zytH96yyh2BKXAYO1yAzPaK5SE-2FPFrIM2nfHg9EYs5j6O0aVybF-2BrL5pDHJbViT23-2FKF2qwtce5IdFg6LOPx7i0p0iI58E55SwdvpyktG8Idci9AcJ4Vw-3D-3D')">
+          <span class="icon">🏫</span><span class="title">DBATU University</span>
+        </div>
+        <!-- 16. YCMOU (सब-पेज उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-ycmou')">
-          <span class="icon">📚</span>
-          <span class="title">YCMOU Service</span>
+          <span class="icon">📚</span><span class="title">YCMOU Service</span>
         </div>
-        <!-- 18. Pi7 (सब-फोल्डर्स उघडणारे) -->
+        <!-- 17. Pi7 (सब-पेज उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-pi7')">
-          <span class="icon">📑</span>
-          <span class="title">Pi7 All PDF Service</span>
+          <span class="icon">📑</span><span class="title">Pi7 All PDF Service</span>
         </div>
-        <!-- 19. Light PDF -->
-        <a class="card-folder" href="https://lightpdf.com/edit-pdf" target="_blank"><span class="icon">✏️</span><span class="title">Pdf Edit / Light PDF</span></a>
-        <!-- 20. Multiple Pages per Sheet -->
-        <a class="card-folder" href="https://online2pdf.com/en/multiple-pages-per-sheet" target="_blank"><span class="icon">📄</span><span class="title">Multiple Pages per Page</span></a>
-        <!-- 21. Passport Photo Maker -->
-        <a class="card-folder" href="https://www.cutout.pro/passport-photo-maker/upload" target="_blank"><span class="icon">🖼️</span><span class="title">Passport Photo Maker</span></a>
-        <!-- 22. HDHub4u Movies -->
-        <a class="card-folder" href="https://hdhub4uhd.online/" target="_blank"><span class="icon">🎬</span><span class="title">HDHub4u Movies</span></a>
+        <!-- 18. Light PDF -->
+        <div class="card-folder" onclick="goToLink('https://lightpdf.com/edit-pdf')">
+          <span class="icon">✏️</span><span class="title">Pdf Edit / Light PDF</span>
+        </div>
+        <!-- 19. Multiple Pages per Sheet -->
+        <div class="card-folder" onclick="goToLink('https://online2pdf.com/en/multiple-pages-per-sheet')">
+          <span class="icon">📄</span><span class="title">Multiple Pages per Page</span>
+        </div>
+        <!-- 20. Passport Photo Maker -->
+        <div class="card-folder" onclick="goToLink('https://www.cutout.pro/passport-photo-maker/upload')">
+          <span class="icon">🖼️</span><span class="title">Passport Photo Maker</span>
+        </div>
+        <!-- 21. HDHub4u Movies -->
+        <div class="card-folder" onclick="goToLink('https://hdhub4uhd.online/')">
+          <span class="icon">🎬</span><span class="title">HDHub4u Movies</span>
+        </div>
       </div>
     </div>
 
@@ -172,14 +210,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <span class="page-heading">📚 YCMOU Service</span>
       </div>
       <div class="grid-2">
-        <a class="card-folder" href="https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU" target="_blank">
+        <div class="card-folder" onclick="goToLink('https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU')">
           <span class="icon">📝</span>
           <span class="title">Admission</span>
-        </a>
-        <a class="card-folder" href="https://ycmou.digitaluniversity.ac/Content.aspx?ID=1497" target="_blank">
+        </div>
+        <div class="card-folder" onclick="goToLink('https://ycmou.digitaluniversity.ac/Content.aspx?ID=1497')">
           <span class="icon">👨‍🎓</span>
           <span class="title">Student Login</span>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -190,14 +228,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <span class="page-heading">📑 Pi7 Services</span>
       </div>
       <div class="grid-2">
-        <a class="card-folder" href="https://image.pi7.org/" target="_blank">
+        <div class="card-folder" onclick="goToLink('https://image.pi7.org/')">
           <span class="icon">🖼️</span>
           <span class="title">Pi7 Image Tools</span>
-        </a>
-        <a class="card-folder" href="https://pdf.pi7.org/" target="_blank">
+        </div>
+        <div class="card-folder" onclick="goToLink('https://pdf.pi7.org/')">
           <span class="icon">📄</span>
           <span class="title">Pi7 PDF Tools</span>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -208,20 +246,13 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <span class="page-heading">💼 नोकरी विभाग</span>
       </div>
       <div class="grid-2">
-        <!-- 1. ग्रुप बी अँड सी कम्बाईन -->
-        <a class="card-folder" href="#" target="_blank"><span class="icon">📑</span><span class="title">Group B & C Combine</span></a>
-        <!-- 2. आरोग्य विभाग -->
-        <a class="card-folder" href="#" target="_blank"><span class="icon">🏥</span><span class="title">आरोग्य विभाग</span></a>
-        <!-- 3. आरआरबी रेल्वे -->
-        <a class="card-folder" href="#" target="_blank"><span class="icon">🚆</span><span class="title">RRB Railway</span></a>
-        <!-- 4. इतर भरती -->
-        <a class="card-folder" href="#" target="_blank"><span class="icon">📢</span><span class="title">इतर भरती</span></a>
-        <!-- 5. इंजिनिअरिंग विभाग -->
-        <a class="card-folder" href="#" target="_blank"><span class="icon">⚙️</span><span class="title">इंजिनिअरिंग विभाग</span></a>
-        <!-- 6. सॅनिटरी कोर्स कॉलेज -->
-        <a class="card-folder" href="#" target="_blank"><span class="icon">🩺</span><span class="title">Sanitary Course College</span></a>
-        <!-- 7. बीएससी विभाग -->
-        <a class="card-folder" href="#" target="_blank"><span class="icon">🔬</span><span class="title">B.Sc विभाग</span></a>
+        <div class="card-folder"><span class="icon">📑</span><span class="title">Group B & C Combine</span></div>
+        <div class="card-folder"><span class="icon">🏥</span><span class="title">आरोग्य विभाग</span></div>
+        <div class="card-folder"><span class="icon">🚆</span><span class="title">RRB Railway</span></div>
+        <div class="card-folder"><span class="icon">📢</span><span class="title">इतर भरती</span></div>
+        <div class="card-folder"><span class="icon">⚙️</span><span class="title">इंजिनिअरिंग विभाग</span></div>
+        <div class="card-folder"><span class="icon">🩺</span><span class="title">Sanitary Course College</span></div>
+        <div class="card-folder"><span class="icon">🔬</span><span class="title">B.Sc विभाग</span></div>
       </div>
     </div>
 
@@ -232,14 +263,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <span class="page-heading">▶️ YouTube Videos</span>
       </div>
       <div>
-        <a class="video-card" href="#" target="_blank">
+        <div class="video-card">
           <div class="video-thumb">▶️</div>
           <div class="video-info">YouTube Saved Video 1 (Link नंतर जोडू)</div>
-        </a>
-        <a class="video-card" href="#" target="_blank">
+        </div>
+        <div class="video-card">
           <div class="video-thumb">▶️</div>
           <div class="video-info">YouTube Saved Video 2 (Link नंतर जोडू)</div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -250,14 +281,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <span class="page-heading">📸 Instagram Videos</span>
       </div>
       <div>
-        <a class="video-card" href="#" target="_blank">
+        <div class="video-card">
           <div class="video-thumb">📸</div>
           <div class="video-info">Instagram Reel / Video 1 (Link नंतर जोडू)</div>
-        </a>
-        <a class="video-card" href="#" target="_blank">
+        </div>
+        <div class="video-card">
           <div class="video-thumb">📸</div>
           <div class="video-info">Instagram Reel / Video 2 (Link नंतर जोडू)</div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -274,6 +305,16 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 <script>
 const FIXED_PASS = "Sun@0909";
+
+// बाहेरची लिंक थेट ओपन करण्याचे सुरक्षित फंक्शन
+function goToLink(url) {
+  if (!url || url === "#") return;
+  const win = window.open(url, '_blank');
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+    // पॉपअप ब्लॉक झाल्यास त्याच टॅबमध्ये उघडेल
+    window.location.href = url;
+  }
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   const savedUser = localStorage.getItem("loggedInUser");
