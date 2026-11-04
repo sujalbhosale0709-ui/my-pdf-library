@@ -80,23 +80,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .search-input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); font-size: 14px; outline: none; }
 .search-input:focus { border-color: var(--accent-color); }
 
-/* Copy Utility & Planner Mini Boxes */
-.quick-tools-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; margin-bottom: 15px; }
-.tools-title { font-size: 13px; font-weight: bold; color: var(--accent-color); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-.copy-pill-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-.copy-pill { background: var(--bg-color); border: 1px solid var(--border-color); padding: 6px 10px; border-radius: 6px; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--text-main); }
-.copy-pill:active { transform: scale(0.96); }
-
-/* Daily Planner Checklist */
-.planner-input-group { display: flex; gap: 8px; margin-bottom: 8px; }
-.planner-input-group input { flex: 1; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); font-size: 13px; outline: none; }
-.planner-input-group button { background: var(--primary-color); color: #fff; border: none; padding: 0 14px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px; }
-.task-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-color); padding: 6px 10px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border-color); }
-.task-item.done span { text-decoration: line-through; opacity: 0.6; }
-.task-actions { display: flex; gap: 6px; align-items: center; }
-.task-actions button { background: transparent; border: none; cursor: pointer; font-size: 13px; }
-
 /* Grid Layouts */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .card-folder { background: var(--card-bg); padding: 16px 8px; border-radius: 12px; text-align: center; cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.15s, background 0.15s; color: var(--text-main); display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; position: relative; }
@@ -173,30 +156,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- Live Search Bar -->
     <div class="search-container">
       <input id="liveSearchInput" class="search-input" type="text" placeholder="🔍 शोधा (उदा. M1, PAN, Driving, YCMOU...)" oninput="filterCards()">
-    </div>
-
-    <!-- Quick Tools (Copy Tool & Daily Planner) -->
-    <div class="quick-tools-box">
-      <div class="tools-title">
-        <span>📋 क्विक कॉपी आयडी (Quick Copy)</span>
-      </div>
-      <div class="copy-pill-wrap">
-        <div class="copy-pill" onclick="copyText('2026110499', 'ॲप्लिकेशन नंबर')">
-          📄 ॲप्लिकेशन नंबर: <b>2026110499</b> 📋
-        </div>
-        <div class="copy-pill" onclick="copyText('PRN99882211', 'PRN नंबर')">
-          🎓 PRN नंबर: <b>PRN99882211</b> 📋
-        </div>
-      </div>
-
-      <div class="tools-title" style="margin-top: 10px;">
-        <span>📝 डेली टास्क व शेड्युल (Daily Planner)</span>
-      </div>
-      <div class="planner-input-group">
-        <input id="taskInput" type="text" placeholder="नवीन टास्क जोडा (उदा. M1 Unit 2 PYQ)...">
-        <button onclick="addTask()">जोडा</button>
-      </div>
-      <ul id="taskList" class="task-list"></ul>
     </div>
 
     <!-- MAIN MENU (४ मुख्य फोल्डर्स) -->
@@ -594,64 +553,6 @@ function shareWhatsApp(e, title, url) {
   window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
 }
 
-/* --- क्विक कॉपी टूल (Quick Copy) --- */
-function copyText(val, label) {
-  navigator.clipboard.writeText(val).then(() => {
-    alert(`✅ ${label} कॉपी झाला: ${val}`);
-  }).catch(() => {
-    prompt("हा क्रमांक कॉपी करा:", val);
-  });
-}
-
-/* --- डेली टास्क मॅनेजर (Daily Planner) --- */
-function getTasks() {
-  return JSON.parse(localStorage.getItem('dailyTasks') || '[]');
-}
-
-function saveTasks(tasks) {
-  localStorage.setItem('dailyTasks', JSON.stringify(tasks));
-  renderTasks();
-}
-
-function renderTasks() {
-  const list = document.getElementById("taskList");
-  list.innerHTML = "";
-  const tasks = getTasks();
-  tasks.forEach((t, index) => {
-    const li = document.createElement("li");
-    li.className = "task-item" + (t.done ? " done" : "");
-    li.innerHTML = `
-      <span onclick="toggleTask(${index})" style="cursor:pointer;">${t.done ? '✓ ' : '○ '} ${t.text}</span>
-      <div class="task-actions">
-        <button onclick="deleteTask(${index})" title="हटवा">🗑️</button>
-      </div>
-    `;
-    list.appendChild(li);
-  });
-}
-
-function addTask() {
-  const input = document.getElementById("taskInput");
-  const val = input.value.trim();
-  if (!val) return;
-  const tasks = getTasks();
-  tasks.push({ text: val, done: false });
-  input.value = "";
-  saveTasks(tasks);
-}
-
-function toggleTask(index) {
-  const tasks = getTasks();
-  tasks[index].done = !tasks[index].done;
-  saveTasks(tasks);
-}
-
-function deleteTask(index) {
-  const tasks = getTasks();
-  tasks.splice(index, 1);
-  saveTasks(tasks);
-}
-
 /* --- रिअल-टाइम लाइव्ह शोध (Live Instant Search) --- */
 function filterCards() {
   const query = document.getElementById("liveSearchInput").value.toLowerCase().trim();
@@ -684,7 +585,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("dashboard-section").style.display = "none";
   }
   loadSheetData();
-  renderTasks();
   resetInactivityTimer();
 
   // PWA Service Worker Registration
