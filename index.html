@@ -1,496 +1,381 @@
 <!DOCTYPE html>
 <html lang="mr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Digital Library</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b132b; color: #ffffff; min-height: 100vh; padding: 20px 10px; padding-bottom: 90px; }
-.container { max-width: 500px; margin: 0 auto; }
-
-/* Header */
-.header-box { text-align: center; margin-bottom: 25px; }
-.header-box h1 { font-size: 26px; color: #48cae4; margin-bottom: 5px; }
-.header-box p { font-size: 14px; color: #94a3b8; }
-
-/* Login Box */
-#login-section { background: #1c2541; padding: 25px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: 1px solid #3a506b; }
-.input-group { margin-bottom: 15px; }
-.input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
-.input-group input { width: 100%; padding: 13px; border-radius: 10px; border: 1px solid #3a506b; background: #0b132b; color: #fff; font-size: 15px; outline: none; }
-.input-group input:focus { border-color: #48cae4; }
-.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 10px; background: #0077b6; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; }
-.btn-primary:active { background: #0096c7; }
-
-/* Dashboard Sections */
-#dashboard-section { display: none; }
-.user-bar { display: flex; justify-content: space-between; align-items: center; background: #1c2541; padding: 12px 18px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #3a506b; }
-.user-bar span { color: #48cae4; font-weight: bold; font-size: 15px; }
-.btn-logout { background: #e63946; color: white; border: none; padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
-
-/* Grid Layouts */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.card-folder:active { transform: scale(0.96); background: #233154; border-color: #48cae4; }
-.card-folder .icon { font-size: 32px; margin-bottom: 8px; }
-.card-folder .title { font-size: 14px; font-weight: 600; line-height: 1.3; color: #ffffff; }
-
-/* Sub Pages */
-.sub-page { display: none; }
-.top-nav { display: flex; align-items: center; margin-bottom: 18px; gap: 12px; }
-.btn-back { background: #3a506b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold; }
-.page-heading { font-size: 18px; color: #48cae4; font-weight: bold; }
-
-/* Video Cards */
-.video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; }
-.video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
-.video-info { padding: 12px; font-size: 15px; font-weight: 600; }
-
-/* AI Floating Button */
-#ai-floating-btn { position: fixed; bottom: 25px; right: 20px; width: 62px; height: 62px; border-radius: 50%; background: linear-gradient(135deg, #48cae4, #7209b7); box-shadow: 0 4px 20px rgba(114, 9, 183, 0.8); display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 99999; border: 2px solid #ffffff; }
-#ai-floating-btn span { font-size: 28px; }
-
-/* AI Modal */
-#ai-modal { display: none; position: fixed; bottom: 95px; right: 15px; left: 15px; max-width: 470px; margin: 0 auto; background: #1c2541; border-radius: 16px; border: 2px solid #48cae4; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.9); z-index: 100000; }
-.ai-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3a506b; padding-bottom: 8px; margin-bottom: 10px; }
-.ai-title { font-size: 16px; font-weight: bold; color: #48cae4; }
-.btn-close-ai { background: none; border: none; color: #cbd5e1; font-size: 20px; cursor: pointer; }
-#ai-status { font-size: 13px; color: #94a3b8; margin-bottom: 8px; font-style: italic; }
-#ai-response { font-size: 14px; line-height: 1.5; color: #ffffff; background: #0b132b; padding: 10px; border-radius: 10px; max-height: 160px; overflow-y: auto; margin-bottom: 12px; border: 1px solid #3a506b; }
-.btn-speak { width: 100%; padding: 12px; background: #7209b7; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; margin-bottom: 6px; }
-
-/* Key Setup UI */
-#key-setup-box { display: none; margin-bottom: 10px; padding: 10px; background: #0b132b; border-radius: 8px; border: 1px dashed #48cae4; }
-#key-setup-box input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #3a506b; background: #1c2541; color: white; font-size: 12px; margin-bottom: 6px; }
-#key-setup-box button { padding: 6px 12px; background: #0077b6; color: white; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Digital Library</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #1e293b;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #334155;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      color: #38bdf8;
+    }
+    .logout-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    #login-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      padding: 20px;
+    }
+    .login-card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .login-card input {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border: 1px solid #475569;
+      background: #0f172a;
+      color: white;
+      font-size: 1rem;
+    }
+    .login-card button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: #38bdf8;
+      color: #0f172a;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #app-screen {
+      display: none;
+      padding: 20px;
+      flex-grow: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      font-weight: bold;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .menu-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 24px 16px;
+      border-radius: 16px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .menu-card:active {
+      transform: scale(0.96);
+      background: #334155;
+    }
+    .menu-card i {
+      font-size: 2.2rem;
+    }
+    .ai-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+      cursor: pointer;
+      z-index: 100;
+      color: white;
+      font-size: 1.5rem;
+    }
+    .ai-modal {
+      display: none;
+      position: fixed;
+      bottom: 95px;
+      right: 20px;
+      left: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      background: #1e293b;
+      border: 1px solid #38bdf8;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      z-index: 101;
+    }
+    .ai-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .ai-modal-header h3 {
+      font-size: 1.1rem;
+      color: #38bdf8;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    .ai-box {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 12px;
+      min-height: 80px;
+      max-height: 160px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+    .mic-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      background: #9333ea;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
+  <header id="main-header" style="display: none;">
+    <h1>स्वागत आहे, Sujal!</h1>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </header>
 
-  <!-- LOGIN PAGE -->
-  <div id="login-section">
-    <div class="header-box">
-      <h1>📚 Digital Portal</h1>
-      <p>तुमचे नाव, मोबाईल आणि पासवर्ड टाकून लॉगिन करा</p>
+  <div id="login-screen">
+    <div class="login-card">
+      <h2 style="margin-bottom: 20px; color: #38bdf8;">Digital Library</h2>
+      <input type="password" id="passcode" placeholder="पासवर्ड टाका...">
+      <button onclick="handleLogin()">Login</button>
+      <p id="login-error" style="color: #ef4444; margin-top: 10px; font-size: 0.9rem; display: none;">चुकीचा पासवर्ड!</p>
     </div>
-    <div class="input-group">
-      <label>पूर्ण नाव</label>
-      <input id="userName" type="text" placeholder="उदा. Sujal Bhosle">
-    </div>
-    <div class="input-group">
-      <label>मोबाईल नंबर</label>
-      <input id="userMobile" type="tel" maxlength="10" placeholder="10 अंकी मोबाईल नंबर">
-    </div>
-    <div class="input-group">
-      <label>पासवर्ड</label>
-      <input id="userPass" type="password" placeholder="पासवर्ड टाका">
-    </div>
-    <button class="btn-primary" type="button" onclick="startLogin()">लॉगिन करा →</button>
   </div>
 
-  <!-- DASHBOARD SECTION -->
-  <div id="dashboard-section">
-    <div class="user-bar">
-      <span id="welcomeText">Welcome!</span>
-      <button class="btn-logout" type="button" onclick="startLogout()">Logout</button>
+  <div id="app-screen">
+    <h2 class="section-title">मुख्य विभाग</h2>
+    <div class="grid-container">
+      <a href="https://www.google.com" target="_blank" class="menu-card">
+        <i class="fa-solid fa-globe" style="color: #38bdf8;"></i>
+        <span>विविध Websites</span>
+      </a>
+      <a href="https://rojgar.mahaswayam.gov.in" target="_blank" class="menu-card">
+        <i class="fa-solid fa-briefcase" style="color: #fb923c;"></i>
+        <span>नोकरी विभाग</span>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" class="menu-card">
+        <i class="fa-brands fa-youtube" style="color: #f87171;"></i>
+        <span>YouTube Saved Video Link</span>
+      </a>
+      <a href="https://www.instagram.com" target="_blank" class="menu-card">
+        <i class="fa-solid fa-camera-retro" style="color: #e879f9;"></i>
+        <span>Instagram Saved Video Links</span>
+      </a>
     </div>
-
-    <!-- MAIN MENU -->
-    <div id="main-menu">
-      <div class="header-box" style="margin-bottom: 15px;">
-        <h2 style="font-size: 20px; color: #cbd5e1;">मुख्य विभाग</h2>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="openSection('sec-websites')">
-          <span class="icon">🌐</span>
-          <span class="title">विविध Websites</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-nokari')">
-          <span class="icon">💼</span>
-          <span class="title">नोकरी विभाग</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-youtube')">
-          <span class="icon">▶️</span>
-          <span class="title">YouTube Saved Video Link</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-instagram')">
-          <span class="icon">📸</span>
-          <span class="title">Instagram Saved Video Links</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 1: विविध WEBSITES -->
-    <div id="sec-websites" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
-        <span class="page-heading">🌐 विविध Websites</span>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="navTo('https://www.irctc.co.in/eticket/booking/train-list')">
-          <span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://tathya.uidai.gov.in/access/login?role=resident')">
-          <span class="icon">🪪</span><span class="title">आधार Service</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')">
-          <span class="icon">💳</span><span class="title">PAN Service</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://voters.eci.gov.in/login')">
-          <span class="icon">🗳️</span><span class="title">Voter Service</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://mahasarathi.maharashtra.gov.in/home/landing')">
-          <span class="icon">🏛️</span><span class="title">महा सारथी</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')">
-          <span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://mahadbt2.maharashtra.gov.in/web/guest/home')">
-          <span class="icon">🎓</span><span class="title">MahaDBT 2.0</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx')">
-          <span class="icon">🌾</span><span class="title">Ration Card Service</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels')">
-          <span class="icon">⛏️</span><span class="title">मनरेगा योजना</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://mahabocw.in/en/')">
-          <span class="icon">👷</span><span class="title">कामगार योजना</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en')">
-          <span class="icon">📂</span><span class="title">DigiLocker</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://boardmarksheet.maharashtra.gov.in/emarksheet/')">
-          <span class="icon">📊</span><span class="title">मार्कशीट Service</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://digitalsatbara.mahabhumi.gov.in/dslr')">
-          <span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://unifiedportal-mem.epfindia.gov.in/memberinterface/')">
-          <span class="icon">📑</span><span class="title">PF Service</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://cvc.barti.in/home')">
-          <span class="icon">📜</span><span class="title">Caste Validity</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://u27342909.ct.sendgrid.net/ls/click?upn=u001.nwvd-2FCtPux50-2BkufzRNz4b2bKTiijGEuWnR8QFzWCWbqTuXKZWQh5eJAzMkHH1EfAVbY_ZeZkPPKGpocOXnC6pCili6lWA1jwF9qfKLfLoDFnk1H96rIdndNv-2F3cOAPJO3XnYRS3NYjNkxazHiR-2BN7nAo7N3h1atz52vG0zytH96yyh2BKXAYO1yAzPaK5SE-2FPFrIM2nfHg9EYs5j6O0aVybF-2BrL5pDHJbViT23-2FKF2qwtce5IdFg6LOPx7i0p0iI58E55SwdvpyktG8Idci9AcJ4Vw-3D-3D')">
-          <span class="icon">🏫</span><span class="title">DBATU University</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-ycmou')">
-          <span class="icon">📚</span>
-          <span class="title">YCMOU Service</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-pi7')">
-          <span class="icon">📑</span>
-          <span class="title">Pi7 All PDF Service</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://lightpdf.com/edit-pdf')">
-          <span class="icon">✏️</span><span class="title">Pdf Edit / Light PDF</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://online2pdf.com/en/multiple-pages-per-sheet')">
-          <span class="icon">📄</span><span class="title">Multiple Pages per Page</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://www.cutout.pro/passport-photo-maker/upload')">
-          <span class="icon">🖼️</span><span class="title">Passport Photo Maker</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://hdhub4uhd.online/')">
-          <span class="icon">🎬</span><span class="title">HDHub4u Movies</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUB SECTION 1.1: YCMOU -->
-    <div id="sec-ycmou" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" type="button" onclick="openSection('sec-websites')">← Back</button>
-        <span class="page-heading">📚 YCMOU Service</span>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="navTo('https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU')">
-          <span class="icon">📝</span><span class="title">Admission</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://ycmou.digitaluniversity.ac/Content.aspx?ID=1497')">
-          <span class="icon">👨‍🎓</span><span class="title">Student Login</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUB SECTION 1.2: Pi7 -->
-    <div id="sec-pi7" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" type="button" onclick="openSection('sec-websites')">← Back</button>
-        <span class="page-heading">📑 Pi7 Services</span>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="navTo('https://image.pi7.org/')">
-          <span class="icon">🖼️</span><span class="title">Pi7 Image Tools</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://pdf.pi7.org/')">
-          <span class="icon">📄</span><span class="title">Pi7 PDF Tools</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 2: नोकरी विभाग -->
-    <div id="sec-nokari" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
-        <span class="page-heading">💼 नोकरी विभाग</span>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder"><span class="icon">📑</span><span class="title">Group B & C Combine</span></div>
-        <div class="card-folder"><span class="icon">🏥</span><span class="title">आरोग्य विभाग</span></div>
-        <div class="card-folder"><span class="icon">🚆</span><span class="title">RRB Railway</span></div>
-        <div class="card-folder"><span class="icon">📢</span><span class="title">इतर भरती</span></div>
-        <div class="card-folder"><span class="icon">⚙️</span><span class="title">इंजिनिअरिंग विभाग</span></div>
-        <div class="card-folder"><span class="icon">🩺</span><span class="title">Sanitary Course College</span></div>
-        <div class="card-folder"><span class="icon">🔬</span><span class="title">B.Sc विभाग</span></div>
-      </div>
-    </div>
-
-    <!-- SECTION 3: YouTube Videos -->
-    <div id="sec-youtube" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
-        <span class="page-heading">▶️ YouTube Videos</span>
-      </div>
-      <div>
-        <div class="video-card">
-          <div class="video-thumb">▶️</div>
-          <div class="video-info">YouTube Saved Video 1 (Link नंतर जोडू)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 4: Instagram Videos -->
-    <div id="sec-instagram" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
-        <span class="page-heading">📸 Instagram Videos</span>
-      </div>
-      <div>
-        <div class="video-card">
-          <div class="video-thumb">📸</div>
-          <div class="video-info">Instagram Reel / Video 1 (Link नंतर जोडू)</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-</div>
-
-<!-- AI FLOATING BUTTON -->
-<div id="ai-floating-btn" onclick="toggleAi()">
-  <span>✨</span>
-</div>
-
-<!-- AI MODAL -->
-<div id="ai-modal">
-  <div class="ai-header">
-    <div class="ai-title">✨ Gemini AI Assistant</div>
-    <button class="btn-close-ai" type="button" onclick="toggleAi()">✕</button>
-  </div>
-  
-  <div id="key-setup-box">
-    <div style="font-size: 11px; color: #48cae4; margin-bottom: 4px;">Gemini API Key जोडा (फक्त एकदाच):</div>
-    <input type="password" id="inputApiKey" placeholder="API Key पेस्ट करा">
-    <button type="button" onclick="saveGeminiKey()">Key सेव्ह करा</button>
+  <!-- AI बटण आणि विंडो -->
+  <div class="ai-fab" id="ai-fab" onclick="toggleAiModal()" style="display: none;">
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
   </div>
 
-  <div id="ai-status">माईकवर टच करा आणि कोणताही प्रश्न विचारा...</div>
-  <div id="ai-response">नमस्कार! मी Google Gemini AI आहे. स्क्रीनवर काय करायचे आहे किंवा तुमचा कोणताही प्रश्न विचारा.</div>
-  <button id="micBtn" class="btn-speak" type="button" onclick="startVoice()">🎙️ बोलून विचारा</button>
-  <div style="text-align: right;"><a href="javascript:void(0)" onclick="toggleKeyBox()" style="font-size: 11px; color: #94a3b8; text-decoration: none;">⚙️ API Key बदला</a></div>
-</div>
+  <div class="ai-modal" id="ai-modal">
+    <div class="ai-modal-header">
+      <h3>✨ AI Assistant</h3>
+      <button class="close-btn" onclick="toggleAiModal()">&times;</button>
+    </div>
+    <p id="ai-status" style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">तयार आहे...</p>
+    <div class="ai-box" id="ai-response">तुम्हाला काय मदत हवी आहे? खालील बटण दाबून बोला.</div>
+    <button class="mic-btn" id="micBtn" onclick="startVoiceRecognition()">
+      <i class="fa-solid fa-microphone"></i> <span>बोलून विचारा</span>
+    </button>
+  </div>
 
-<script>
-const FIXED_PASS = "Sun@0909";
-
-function navTo(url) {
-  if (url) window.location.assign(url);
-}
-
-function startLogin() {
-  const n = document.getElementById("userName").value.trim();
-  const m = document.getElementById("userMobile").value.trim();
-  const p = document.getElementById("userPass").value.trim();
-
-  if (!n || !m || !p) {
-    alert("कृपया नाव, मोबाईल आणि पासवर्ड भरा!");
-    return;
-  }
-  if (p !== FIXED_PASS) {
-    alert("चुकीचा पासवर्ड! पासवर्ड Sun@0909 असा टाका.");
-    return;
-  }
-
-  document.getElementById("login-section").style.display = "none";
-  document.getElementById("dashboard-section").style.display = "block";
-  document.getElementById("welcomeText").innerText = "स्वागत आहे, " + n + "!";
-  document.getElementById("ai-floating-btn").style.display = "flex";
-  backToMain();
-}
-
-function startLogout() {
-  document.getElementById("dashboard-section").style.display = "none";
-  document.getElementById("ai-floating-btn").style.display = "none";
-  document.getElementById("ai-modal").style.display = "none";
-  document.getElementById("login-section").style.display = "block";
-}
-
-function openSection(secId) {
-  document.getElementById("main-menu").style.display = "none";
-  const pages = document.getElementsByClassName("sub-page");
-  for (let i = 0; i < pages.length; i++) pages[i].style.display = "none";
-  const target = document.getElementById(secId);
-  if (target) target.style.display = "block";
-}
-
-function backToMain() {
-  const pages = document.getElementsByClassName("sub-page");
-  for (let i = 0; i < pages.length; i++) pages[i].style.display = "none";
-  document.getElementById("main-menu").style.display = "block";
-}
-
-/* AI LOGIC & REAL GEMINI CALL */
-function toggleAi() {
-  const m = document.getElementById("ai-modal");
-  const isOpen = (m.style.display === "block");
-  m.style.display = isOpen ? "none" : "block";
-
-  if (!isOpen) {
-    const key = localStorage.getItem("gemini_user_key");
-    if (!key) {
-      document.getElementById("key-setup-box").style.display = "block";
-      document.getElementById("ai-status").innerText = "कृपया आधी खालील बॉक्समध्ये तुमची Gemini API Key पेस्ट करा.";
-    } else {
-      document.getElementById("key-setup-box").style.display = "none";
+  <script>
+    // १. लॉगिन सिस्टिम
+    function handleLogin() {
+      const code = document.getElementById("passcode").value;
+      if (code === "Sun@0909") {
+        localStorage.setItem("userLoggedIn", "true");
+        showApp();
+      } else {
+        const err = document.getElementById("login-error");
+        err.style.display = "block";
+      }
     }
-  }
-}
 
-function toggleKeyBox() {
-  const box = document.getElementById("key-setup-box");
-  box.style.display = (box.style.display === "block") ? "none" : "block";
-}
-
-function saveGeminiKey() {
-  const val = document.getElementById("inputApiKey").value.trim();
-  if (!val) {
-    alert("कृपया योग्य Key पेस्ट करा!");
-    return;
-  }
-  localStorage.setItem("gemini_user_key", val);
-  document.getElementById("key-setup-box").style.display = "none";
-  document.getElementById("ai-status").innerText = "Key सेव्ह झाली! आता माईकवर टच करून बोला.";
-  alert("Gemini AI यशस्वीरित्या जोडले गेले!");
-}
-
-function getCurrentScreenDetails() {
-  const activeSub = Array.from(document.getElementsByClassName("sub-page")).find(p => p.style.display === "block");
-  let sec = "मुख्य विभाग (Main Menu)";
-  let items = [];
-
-  if (activeSub) {
-    const h = activeSub.querySelector(".page-heading");
-    sec = h ? h.innerText : "सब-पेज";
-        activeSub.querySelectorAll(".title").forEach(t => items.push(t.innerText.trim()));
-  } else {
-    document.querySelectorAll("#main-menu .title").forEach(t => items.push(t.innerText.trim()));
-  }
-  return "वापरकर्ता सध्या '" + sec + "' या स्क्रीनवर आहे. समोर दिसणारे पर्याय: [" + items.join(", ") + "].";
-}
-
-function startVoice() {
-  const key = localStorage.getItem("gemini_user_key");
-  if (!key) {
-    document.getElementById("key-setup-box").style.display = "block";
-    alert("कृपया आधी तुमची नवीन Gemini API Key जोडा!");
-    return;
-  }
-
-  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRec) {
-    alert("तुमच्या ब्राउझरमध्ये व्हॉईस सपोर्ट उपलब्ध नाही.");
-    return;
-  }
-
-  const rec = new SpeechRec();
-  rec.lang = "mr-IN";
-  
-  const status = document.getElementById("ai-status");
-  const micBtn = document.getElementById("micBtn");
-  
-  rec.onstart = function() {
-    micBtn.innerText = "🛑 ऐकत आहे...";
-    status.innerText = "बोला, मी ऐकत आहे...";
-  };
-  
-  rec.onresult = function(e) {
-    const speech = e.results[0][0].transcript;
-    status.innerText = "विचारलेला प्रश्न: " + speech;
-    askRealGemini(speech, key);
-  };
-  
-  rec.onerror = function() {
-    micBtn.innerText = "🎙️ बोलून विचारा";
-    status.innerText = "आवाज समजला नाही, पुन्हा प्रयत्न करा.";
-  };
-  
-  rec.onend = function() {
-    micBtn.innerText = "🎙️ बोलून विचारा";
-  };
-
-  rec.start();
-}
-async function askRealGemini(userQuestion, apiKey) {
-  const status = document.getElementById("ai-status");
-  const resBox = document.getElementById("ai-response");
-
-  status.innerText = "AI विचार करत आहे...";
-  const screenContext = getCurrentScreenDetails();
-
-  const systemPrompt = "तुम्ही 'My Digital Library' चे मदतनीस आहात. स्क्रीनवरील बटन्स आणि संदर्भ पाहून विचारलेल्या प्रश्नाचे सोप्या आणि स्पष्ट मराठीत २-३ वाक्यांत उत्तर द्या.";
-  const fullPrompt = systemPrompt + "\nस्क्रीन: " + screenContext + "\nवापरकर्त्याचा प्रश्न: " + userQuestion;
-
-  try {
-    // मोफत, कोणत्याही API Key ची गरज नसलेला सुरक्षित AI API
-    const response = await fetch("https://text.pollinations.ai/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: "स्क्रीन: " + screenContext + "\nप्रश्न: " + userQuestion }
-        ],
-        model: "openai"
-      })
-    });
-
-    const reply = await response.text();
-
-    if (reply && reply.trim().length > 0) {
-      resBox.innerText = reply;
-      status.innerText = "AI चे उत्तर:";
-      speakAnswer(reply);
-    } else {
-      resBox.innerText = "उत्तर मिळू शकले नाही, पुन्हा विचारून पहा.";
-      status.innerText = "अडचण आली!";
+    function showApp() {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("app-screen").style.display = "block";
+      document.getElementById("main-header").style.display = "flex";
+      document.getElementById("ai-fab").style.display = "flex";
     }
-  } catch (err) {
-    resBox.innerText = "इंटरनेट किंवा सर्व्हर समस्या: " + err.message;
-    status.innerText = "त्रुटी आली!";
-  }
-}
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = "mr-IN";
-    window.speechSynthesis.speak(utt);
-  }
-}
-</script>
 
+    function logout() {
+      localStorage.removeItem("userLoggedIn");
+      location.reload();
+    }
+
+    window.onload = function() {
+      if (localStorage.getItem("userLoggedIn") === "true") {
+        showApp();
+      }
+    };
+
+    // २. AI विंडो उघडणे/बंद करणे
+    function toggleAiModal() {
+      const modal = document.getElementById("ai-modal");
+      modal.style.display = (modal.style.display === "block") ? "none" : "block";
+    }
+
+    function getCurrentScreenDetails() {
+      return "वापरकर्ता डिजिटल लायब्ररीच्या मुख्य स्क्रीनवर आहे. येथे विविध Websites, नोकरी विभाग, YouTube Saved Video Link, आणि Instagram Saved Video Links चे बटन्स आहेत.";
+    }
+
+    // ३. व्हॉइस रेकॉर्डिंग सिस्टिम
+    function startVoiceRecognition() {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) {
+        alert("तुमच्या ब्राउझरमध्ये व्हॉइस सपोर्ट नाही. कृपया Chrome ब्राउझर वापरा.");
+        return;
+      }
+
+      const rec = new SpeechRec();
+      rec.lang = "mr-IN";
+
+      const status = document.getElementById("ai-status");
+      const micBtn = document.getElementById("micBtn");
+
+      rec.onstart = function() {
+        micBtn.innerHTML = "<i class='fa-solid fa-circle-dot' style='color:#f87171;'></i> <span>ऐकत आहे...</span>";
+        status.innerText = "बोला, मी ऐकत आहे...";
+      };
+
+      rec.onresult = function(e) {
+        const speech = e.results[0][0].transcript;
+        status.innerText = "विचारलेला प्रश्न: " + speech;
+        askAI(speech);
+      };
+
+      rec.onerror = function() {
+        micBtn.innerHTML = "<i class='fa-solid fa-microphone'></i> <span>बोलून विचारा</span>";
+        status.innerText = "आवाज समजला नाही, पुन्हा प्रयत्न करा.";
+      };
+
+      rec.onend = function() {
+        micBtn.innerHTML = "<i class='fa-solid fa-microphone'></i> <span>बोलून विचारा</span>";
+      };
+
+      rec.start();
+    }
+
+    // ४. मोफत AI कॉल (कोणत्याही API Key किंवा मॉडेल एरर शिवाय)
+    async function askAI(userQuestion) {
+      const status = document.getElementById("ai-status");
+      const resBox = document.getElementById("ai-response");
+
+      status.innerText = "AI विचार करत आहे...";
+      const screenContext = getCurrentScreenDetails();
+      const systemPrompt = "तुम्ही 'My Digital Library' चे मदतनीस आहात. संदर्भ: " + screenContext + "। विचारलेल्या प्रश्नाचे सोप्या आणि स्पष्ट मराठीत २-३ वाक्यांत उत्तर द्या.";
+
+      try {
+        const response = await fetch("https://text.pollinations.ai/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: userQuestion }
+            ],
+            model: "openai"
+          })
+        });
+
+        const reply = await response.text();
+
+        if (reply && reply.trim().length > 0) {
+          resBox.innerText = reply;
+          status.innerText = "AI चे उत्तर:";
+          speakAnswer(reply);
+        } else {
+          resBox.innerText = "उत्तर मिळाले नाही, कृपया पुन्हा विचारा.";
+          status.innerText = "अडचण आली!";
+        }
+      } catch (err) {
+        resBox.innerText = "कनेक्शन समस्या: " + err.message;
+        status.innerText = "एरर!";
+      }
+    }
+
+    // ५. आवाजात उत्तर वाचणे
+    function speakAnswer(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = "mr-IN";
+        window.speechSynthesis.speak(utt);
+      }
+    }
+  </script>
 </body>
 </html>
