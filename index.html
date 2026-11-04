@@ -4,59 +4,149 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Digital Library</title>
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Digital%20Library%22%2C%22short_name%22%3A%22Library%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230b132b%22%2C%22theme_color%22%3A%22%230077b6%22%7D">
+
 <style>
+:root {
+  --bg-color: #0b132b;
+  --card-bg: #1c2541;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --border-color: #3a506b;
+  --primary-color: #0077b6;
+  --primary-hover: #0096c7;
+  --accent-color: #48cae4;
+  --ticker-bg: #111d40;
+}
+
+body.light-theme {
+  --bg-color: #f1f5f9;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --primary-color: #0284c7;
+  --primary-hover: #0369a1;
+  --accent-color: #0284c7;
+  --ticker-bg: #e2e8f0;
+}
+
+body.amoled-theme {
+  --bg-color: #000000;
+  --card-bg: #121212;
+  --text-main: #ffffff;
+  --text-muted: #737373;
+  --border-color: #262626;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-color: #60a5fa;
+  --ticker-bg: #0a0a0a;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b132b; color: #ffffff; min-height: 100vh; padding: 20px 10px; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); color: var(--text-main); min-height: 100vh; padding: 12px 10px 40px; transition: background 0.3s, color 0.3s; }
 .container { max-width: 500px; margin: 0 auto; }
 
-/* Header & Card */
-.header-box { text-align: center; margin-bottom: 25px; }
-.header-box h1 { font-size: 26px; color: #48cae4; margin-bottom: 5px; }
-.header-box p { font-size: 14px; color: #94a3b8; }
+/* Ticker */
+.ticker-wrap { width: 100%; background: var(--ticker-bg); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; margin-bottom: 12px; white-space: nowrap; padding: 6px 0; }
+.ticker-content { display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; font-size: 13px; color: var(--accent-color); font-weight: 500; }
+@keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+/* Header & Controls */
+.header-box { text-align: center; margin-bottom: 15px; }
+.header-box h1 { font-size: 24px; color: var(--accent-color); margin-bottom: 4px; }
+.header-box p { font-size: 13px; color: var(--text-muted); }
+
+.top-bar-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; }
+.btn-theme { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; }
 
 /* Login Box */
-#login-section { background: #1c2541; padding: 25px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: 1px solid #3a506b; }
-.input-group { margin-bottom: 15px; }
-.input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
-.input-group input { width: 100%; padding: 13px; border-radius: 10px; border: 1px solid #3a506b; background: #0b132b; color: #fff; font-size: 15px; outline: none; }
-.input-group input:focus { border-color: #48cae4; }
-.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 10px; background: #0077b6; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-.btn-primary:hover { background: #0096c7; }
+#login-section { background: var(--card-bg); padding: 22px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: 1px solid var(--border-color); }
+.input-group { margin-bottom: 14px; }
+.input-group label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; }
+.input-group input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); font-size: 15px; outline: none; }
+.input-group input:focus { border-color: var(--accent-color); }
+.btn-primary { width: 100%; padding: 13px; border: none; border-radius: 10px; background: var(--primary-color); color: #fff; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-primary:hover { background: var(--primary-hover); }
 
 /* Dashboard Sections */
 #dashboard-section { display: none; }
-.user-bar { display: flex; justify-content: space-between; align-items: center; background: #1c2541; padding: 12px 18px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #3a506b; }
-.user-bar span { color: #48cae4; font-weight: bold; font-size: 15px; }
-.btn-logout { background: #e63946; color: white; border: none; padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
+.user-bar { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 10px 14px; border-radius: 12px; margin-bottom: 14px; border: 1px solid var(--border-color); }
+.user-bar span { color: var(--accent-color); font-weight: bold; font-size: 14px; }
+.btn-logout { background: #e63946; color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; }
+
+/* Live Search */
+.search-container { margin-bottom: 14px; position: relative; }
+.search-input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); font-size: 14px; outline: none; }
+.search-input:focus { border-color: var(--accent-color); }
+
+/* Copy Utility & Planner Mini Boxes */
+.quick-tools-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; margin-bottom: 15px; }
+.tools-title { font-size: 13px; font-weight: bold; color: var(--accent-color); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.copy-pill-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.copy-pill { background: var(--bg-color); border: 1px solid var(--border-color); padding: 6px 10px; border-radius: 6px; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--text-main); }
+.copy-pill:active { transform: scale(0.96); }
+
+/* Daily Planner Checklist */
+.planner-input-group { display: flex; gap: 8px; margin-bottom: 8px; }
+.planner-input-group input { flex: 1; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); font-size: 13px; outline: none; }
+.planner-input-group button { background: var(--primary-color); color: #fff; border: none; padding: 0 14px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px; }
+.task-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.task-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-color); padding: 6px 10px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border-color); }
+.task-item.done span { text-decoration: line-through; opacity: 0.6; }
+.task-actions { display: flex; gap: 6px; align-items: center; }
+.task-actions button { background: transparent; border: none; cursor: pointer; font-size: 13px; }
 
 /* Grid Layouts */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; transition: transform 0.15s, background 0.15s; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; text-decoration: none; }
-.card-folder:active { transform: scale(0.96); background: #233154; border-color: #48cae4; }
-.card-folder .icon { font-size: 32px; margin-bottom: 8px; }
-.card-folder .title { font-size: 14px; font-weight: 600; line-height: 1.3; color: #ffffff; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.card-folder { background: var(--card-bg); padding: 16px 8px; border-radius: 12px; text-align: center; cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.15s, background 0.15s; color: var(--text-main); display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; position: relative; }
+.card-folder:active { transform: scale(0.96); border-color: var(--accent-color); }
+.card-folder .icon { font-size: 28px; margin-bottom: 6px; }
+.card-folder .title { font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--text-main); }
+
+.card-share-btn { margin-top: 8px; background: #25D366; color: white; border: none; border-radius: 6px; padding: 3px 8px; font-size: 10px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px; }
 
 /* Sub Pages */
 .sub-page { display: none; }
-.top-nav { display: flex; align-items: center; margin-bottom: 18px; gap: 12px; }
-.btn-back { background: #3a506b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold; }
-.page-heading { font-size: 18px; color: #48cae4; font-weight: bold; }
+.top-nav { display: flex; align-items: center; margin-bottom: 14px; gap: 10px; }
+.btn-back { background: var(--border-color); color: white; border: none; padding: 7px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; }
+.page-heading { font-size: 16px; color: var(--accent-color); font-weight: bold; }
 
 /* Video Cards */
-.video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; text-decoration: none; }
-.video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
-.video-info { padding: 12px; font-size: 15px; font-weight: 600; }
+.video-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); cursor: pointer; color: var(--text-main); margin-bottom: 12px; display: block; position: relative; }
+.video-thumb { width: 100%; height: 140px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 36px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); }
+.video-info-box { padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; }
+.video-info { font-size: 14px; font-weight: 600; }
+
+/* Modal Viewers (PDF & Video) */
+.media-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; padding: 10px; }
+.modal-bar { width: 100%; max-width: 600px; display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #1c2541; border-radius: 10px 10px 0 0; }
+.modal-bar span { color: #48cae4; font-weight: bold; font-size: 13px; }
+.modal-close { background: #e63946; color: white; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; }
+.modal-frame { width: 100%; max-width: 600px; height: 75vh; border: none; background: white; border-radius: 0 0 10px 10px; }
 </style>
 </head>
 <body>
 
 <div class="container">
 
+  <!-- Running Notice Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-content">
+      📢 महत्त्वाचे अपडेट्स: MahaDBT शिष्यवृत्ती अंतिम पडताळणी सुरु आहे | DBATU & YCMOU शैक्षणिक हॉलतिकीट लिंक उपलब्ध | दररोज योग्य वेळेत रिव्हिजन करा! 🎯
+    </div>
+  </div>
+
+  <div class="top-bar-controls">
+    <button class="btn-theme" onclick="switchTheme()">🎨 थीम बदला (Theme)</button>
+    <span id="sessionTimerText" style="font-size: 11px; color: var(--text-muted);">🛡️ ऑटो-लॉगआउट: ३० मिनिटे</span>
+  </div>
+
   <!-- LOGIN PAGE -->
   <div id="login-section">
     <div class="header-box">
       <h1>📚 Digital Portal</h1>
-      <p>तुमचे नाव, मोबाईल आणि पासवर्ड टाकून लॉगिन करा</p>
+      <p>नाव, मोबाईल आणि पासवर्ड टाकून लॉगिन करा</p>
     </div>
     <div class="input-group">
       <label>पूर्ण नाव</label>
@@ -80,10 +170,39 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       <button class="btn-logout" onclick="handleLogout()">Logout</button>
     </div>
 
+    <!-- Live Search Bar -->
+    <div class="search-container">
+      <input id="liveSearchInput" class="search-input" type="text" placeholder="🔍 शोधा (उदा. M1, PAN, Driving, YCMOU...)" oninput="filterCards()">
+    </div>
+
+    <!-- Quick Tools (Copy Tool & Daily Planner) -->
+    <div class="quick-tools-box">
+      <div class="tools-title">
+        <span>📋 क्विक कॉपी आयडी (Quick Copy)</span>
+      </div>
+      <div class="copy-pill-wrap">
+        <div class="copy-pill" onclick="copyText('2026110499', 'ॲप्लिकेशन नंबर')">
+          📄 ॲप्लिकेशन नंबर: <b>2026110499</b> 📋
+        </div>
+        <div class="copy-pill" onclick="copyText('PRN99882211', 'PRN नंबर')">
+          🎓 PRN नंबर: <b>PRN99882211</b> 📋
+        </div>
+      </div>
+
+      <div class="tools-title" style="margin-top: 10px;">
+        <span>📝 डेली टास्क व शेड्युल (Daily Planner)</span>
+      </div>
+      <div class="planner-input-group">
+        <input id="taskInput" type="text" placeholder="नवीन टास्क जोडा (उदा. M1 Unit 2 PYQ)...">
+        <button onclick="addTask()">जोडा</button>
+      </div>
+      <ul id="taskList" class="task-list"></ul>
+    </div>
+
     <!-- MAIN MENU (४ मुख्य फोल्डर्स) -->
     <div id="main-menu">
-      <div class="header-box" style="margin-bottom: 15px;">
-        <h2 style="font-size: 20px; color: #cbd5e1;">मुख्य विभाग</h2>
+      <div class="header-box" style="margin-bottom: 12px;">
+        <h2 style="font-size: 18px; color: var(--text-muted);">मुख्य विभाग</h2>
       </div>
       <div class="grid-2">
         <div class="card-folder" onclick="openSection('sec-websites')">
@@ -112,28 +231,28 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <span class="page-heading">🌐 विविध Websites</span>
       </div>
       <div class="grid-2" id="grid-sec-websites">
-        <div class="card-folder" onclick="navTo('https://aaplesarkar.mahaonline.gov.in/en/Login/Login')"><span class="icon">🏢</span><span class="title">CSC Service</span></div>
-        <div class="card-folder" onclick="navTo('https://cvc.barti.in/home')"><span class="icon">📜</span><span class="title">Caste Validity</span></div>
-        <div class="card-folder" onclick="navTo('https://www.irctc.co.in/eticket/booking/train-list')"><span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span></div>
-        <div class="card-folder" onclick="navTo('https://myaadhaar.uidai.gov.in/login')"><span class="icon">🪪</span><span class="title">आधार Service</span></div>
-        <div class="card-folder" onclick="navTo('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')"><span class="icon">💳</span><span class="title">PAN Service</span></div>
-        <div class="card-folder" onclick="navTo('https://voters.eci.gov.in/login')"><span class="icon">🗳️</span><span class="title">Voter Service</span></div>
-        <div class="card-folder" onclick="navTo('https://mahasarathi.maharashtra.gov.in/home/landing')"><span class="icon">🏛️</span><span class="title">महा सारथी</span></div>
-        <div class="card-folder" onclick="navTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')"><span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span></div>
-        <div class="card-folder" onclick="navTo('https://mahadbt2.maharashtra.gov.in/web/guest/home')"><span class="icon">🎓</span><span class="title">MahaDBT 2.0</span></div>
-        <div class="card-folder" onclick="navTo('https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx')"><span class="icon">🌾</span><span class="title">Ration Card Service</span></div>
-        <div class="card-folder" onclick="navTo('https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels')"><span class="icon">⛏️</span><span class="title">मनरेगा योजना</span></div>
-        <div class="card-folder" onclick="navTo('https://mahabocw.in/en/')"><span class="icon">👷</span><span class="title">कामगार योजना</span></div>
-        <div class="card-folder" onclick="navTo('https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en')"><span class="icon">📂</span><span class="title">DigiLocker</span></div>
-        <div class="card-folder" onclick="navTo('https://boardmarksheet.maharashtra.gov.in/emarksheet/')"><span class="icon">📊</span><span class="title">मार्कशीट Service</span></div>
-        <div class="card-folder" onclick="navTo('https://digitalsatbara.mahabhumi.gov.in/dslr')"><span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span></div>
+        <div class="card-folder" onclick="navTo('https://aaplesarkar.mahaonline.gov.in/en/Login/Login')"><span class="icon">🏢</span><span class="title">CSC Service</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'CSC Service', 'https://aaplesarkar.mahaonline.gov.in/en/Login/Login')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://cvc.barti.in/home')"><span class="icon">📜</span><span class="title">Caste Validity</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Caste Validity', 'https://cvc.barti.in/home')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://www.irctc.co.in/eticket/booking/train-list')"><span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Railway Ticket', 'https://www.irctc.co.in/eticket/booking/train-list')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://myaadhaar.uidai.gov.in/login')"><span class="icon">🪪</span><span class="title">आधार Service</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Aadhaar Portal', 'https://myaadhaar.uidai.gov.in/login')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')"><span class="icon">💳</span><span class="title">PAN Service</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'PAN Card Service', 'https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://voters.eci.gov.in/login')"><span class="icon">🗳️</span><span class="title">Voter Service</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Voter Portal', 'https://voters.eci.gov.in/login')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://mahasarathi.maharashtra.gov.in/home/landing')"><span class="icon">🏛️</span><span class="title">महा सारथी</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Maha Sarathi', 'https://mahasarathi.maharashtra.gov.in/home/landing')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')"><span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Driving Licence', 'https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://mahadbt2.maharashtra.gov.in/web/guest/home')"><span class="icon">🎓</span><span class="title">MahaDBT 2.0</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'MahaDBT Portal', 'https://mahadbt2.maharashtra.gov.in/web/guest/home')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx')"><span class="icon">🌾</span><span class="title">Ration Card Service</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Ration Card Portal', 'https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels')"><span class="icon">⛏️</span><span class="title">मनरेगा योजना</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'MNREGA Portal', 'https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://mahabocw.in/en/')"><span class="icon">👷</span><span class="title">कामगार योजना</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Kamgar Yojana', 'https://mahabocw.in/en/')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en')"><span class="icon">📂</span><span class="title">DigiLocker</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'DigiLocker', 'https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://boardmarksheet.maharashtra.gov.in/emarksheet/')"><span class="icon">📊</span><span class="title">मार्कशीट Service</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Marksheet Portal', 'https://boardmarksheet.maharashtra.gov.in/emarksheet/')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://digitalsatbara.mahabhumi.gov.in/dslr')"><span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Digital 7/12', 'https://digitalsatbara.mahabhumi.gov.in/dslr')">Share</button></div>
         <div class="card-folder" onclick="openSection('sec-pf')"><span class="icon">📑</span><span class="title">PF Service</span></div>
-        <div class="card-folder" onclick="navTo('https://u27342909.ct.sendgrid.net/ls/click?upn=u001.nwvd-2FCtPux50-2BkufzRNz4b2bKTiijGEuWnR8QFzWCWbqTuXKZWQh5eJAzMkHH1EfAVbY_ZeZkPPKGpocOXnC6pCili6lWA1jwF9qfKLfLoDFnk1H96rIdndNv-2F3cOAPJO3XnYRS3NYjNkxazHiR-2BN7nAo7N3h1atz52vG0zytH96yyh2BKXAYO1yAzPaK5SE-2FPFrIM2nfHg9EYs5j6O0aVybF-2BrL5pDHJbViT23-2FKF2qwtce5IdFg6LOPx7i0p0iI58E55SwdvpyktG8Idci9AcJ4Vw-3D-3D')"><span class="icon">🏫</span><span class="title">DBATU University</span></div>
+        <div class="card-folder" onclick="navTo('https://u27342909.ct.sendgrid.net/ls/click?upn=u001.nwvd-2FCtPux50-2BkufzRNz4b2bKTiijGEuWnR8QFzWCWbqTuXKZWQh5eJAzMkHH1EfAVbY_ZeZkPPKGpocOXnC6pCili6lWA1jwF9qfKLfLoDFnk1H96rIdndNv-2F3cOAPJO3XnYRS3NYjNkxazHiR-2BN7nAo7N3h1atz52vG0zytH96yyh2BKXAYO1yAzPaK5SE-2FPFrIM2nfHg9EYs5j6O0aVybF-2BrL5pDHJbViT23-2FKF2qwtce5IdFg6LOPx7i0p0iI58E55SwdvpyktG8Idci9AcJ4Vw-3D-3D')"><span class="icon">🏫</span><span class="title">DBATU University</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'DBATU Portal', 'https://dbatu.ac.in')">Share</button></div>
         <div class="card-folder" onclick="openSection('sec-ycmou')"><span class="icon">📚</span><span class="title">YCMOU Service</span></div>
         <div class="card-folder" onclick="openSection('sec-pi7')"><span class="icon">📑</span><span class="title">Pi7 All PDF Service</span></div>
-        <div class="card-folder" onclick="navTo('https://lightpdf.com/edit-pdf')"><span class="icon">✏️</span><span class="title">Pdf Edit / Light PDF</span></div>
-        <div class="card-folder" onclick="navTo('https://online2pdf.com/en/multiple-pages-per-sheet')"><span class="icon">📄</span><span class="title">Multiple Pages per Page</span></div>
-        <div class="card-folder" onclick="navTo('https://www.cutout.pro/passport-photo-maker/upload')"><span class="icon">🖼️</span><span class="title">Passport Photo Maker</span></div>
+        <div class="card-folder" onclick="navTo('https://lightpdf.com/edit-pdf')"><span class="icon">✏️</span><span class="title">Pdf Edit / Light PDF</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Light PDF', 'https://lightpdf.com/edit-pdf')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://online2pdf.com/en/multiple-pages-per-sheet')"><span class="icon">📄</span><span class="title">Multiple Pages per Page</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Online2PDF', 'https://online2pdf.com/en/multiple-pages-per-sheet')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://www.cutout.pro/passport-photo-maker/upload')"><span class="icon">🖼️</span><span class="title">Passport Photo Maker</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'Passport Maker', 'https://www.cutout.pro/passport-photo-maker/upload')">Share</button></div>
         <div class="card-folder" onclick="openSection('sec-hdhub')"><span class="icon">🎬</span><span class="title">HDHub4u Movies</span></div>
       </div>
     </div>
@@ -142,8 +261,8 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <div id="sec-pf" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📑 PF Service</span></div>
       <div class="grid-2" id="grid-sec-pf">
-        <div class="card-folder" onclick="navTo('https://unifiedportal-mem.epfindia.gov.in/memberinterface/')"><span class="icon">🔐</span><span class="title">PF Login</span></div>
-        <div class="card-folder" onclick="navTo('https://passbook.epfindia.gov.in/MemberPassBook/login')"><span class="icon">📖</span><span class="title">PF Passbook</span></div>
+        <div class="card-folder" onclick="navTo('https://unifiedportal-mem.epfindia.gov.in/memberinterface/')"><span class="icon">🔐</span><span class="title">PF Login</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'PF Login', 'https://unifiedportal-mem.epfindia.gov.in/memberinterface/')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://passbook.epfindia.gov.in/MemberPassBook/login')"><span class="icon">📖</span><span class="title">PF Passbook</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'PF Passbook', 'https://passbook.epfindia.gov.in/MemberPassBook/login')">Share</button></div>
       </div>
     </div>
 
@@ -160,8 +279,8 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <div id="sec-ycmou" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📚 YCMOU Service</span></div>
       <div class="grid-2" id="grid-sec-ycmou">
-        <div class="card-folder" onclick="navTo('https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU')"><span class="icon">📝</span><span class="title">Admission</span></div>
-        <div class="card-folder" onclick="navTo('https://ycmou.digitaluniversity.ac/Content.aspx?ID=1497')"><span class="icon">👨‍🎓</span><span class="title">Student Login</span></div>
+        <div class="card-folder" onclick="navTo('https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU')"><span class="icon">📝</span><span class="title">Admission</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'YCMOU Admission', 'https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU')">Share</button></div>
+        <div class="card-folder" onclick="navTo('https://ycmou.digitaluniversity.ac/Content.aspx?ID=1497')"><span class="icon">👨‍🎓</span><span class="title">Student Login</span><button class="card-share-btn" onclick="shareWhatsApp(event, 'YCMOU Portal', 'https://ycmou.digitaluniversity.ac/Content.aspx?ID=1497')">Share</button></div>
       </div>
     </div>
 
@@ -337,8 +456,12 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <div id="sec-youtube" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">▶️ YouTube Videos</span></div>
       <div id="grid-sec-youtube">
-        <div class="video-card"><div class="video-thumb">▶️</div><div class="video-info">YouTube Saved Video 1 (Link नंतर जोडू)</div></div>
-        <div class="video-card"><div class="video-thumb">▶️</div><div class="video-info">YouTube Saved Video 2 (Link नंतर जोडू)</div></div>
+        <div class="video-card">
+          <div class="video-thumb">▶️</div>
+          <div class="video-info-box">
+            <span class="video-info">YouTube Saved Video 1 (Link नंतर जोडू)</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -357,46 +480,40 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- इन्स्टाग्राम ५ फोल्डर्स -->
     <div id="sec-insta-audio" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🎵 ऑडिओ व्हिडिओज</span></div>
-      <div id="grid-sec-insta-audio">
-        <div class="video-card"><div class="video-thumb">🎵</div><div class="video-info">Audio Video 1 (Link नंतर जोडू)</div></div>
-        <div class="video-card"><div class="video-thumb">🎵</div><div class="video-info">Audio Video 2 (Link नंतर जोडू)</div></div>
-      </div>
+      <div id="grid-sec-insta-audio"></div>
     </div>
 
     <div id="sec-insta-dress" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">👔 ड्रेस व्हिडिओज</span></div>
-      <div id="grid-sec-insta-dress">
-        <div class="video-card"><div class="video-thumb">👔</div><div class="video-info">Dress Video 1 (Link नंतर जोडू)</div></div>
-        <div class="video-card"><div class="video-thumb">👔</div><div class="video-info">Dress Video 2 (Link नंतर जोडू)</div></div>
-      </div>
+      <div id="grid-sec-insta-dress"></div>
     </div>
 
     <div id="sec-insta-something" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">✨ समथिंग व्हिडिओज</span></div>
-      <div id="grid-sec-insta-something">
-        <div class="video-card"><div class="video-thumb">✨</div><div class="video-info">Something Video 1 (Link नंतर जोडू)</div></div>
-        <div class="video-card"><div class="video-thumb">✨</div><div class="video-info">Something Video 2 (Link नंतर जोडू)</div></div>
-      </div>
+      <div id="grid-sec-insta-something"></div>
     </div>
 
     <div id="sec-insta-gym" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🏋️‍♂️ जिम व्हिडिओज</span></div>
-      <div id="grid-sec-insta-gym">
-        <div class="video-card"><div class="video-thumb">🏋️‍♂️</div><div class="video-info">Gym Video 1 (Link नंतर जोडू)</div></div>
-        <div class="video-card"><div class="video-thumb">🏋️‍♂️</div><div class="video-info">Gym Video 2 (Link नंतर जोडू)</div></div>
-      </div>
+      <div id="grid-sec-insta-gym"></div>
     </div>
 
     <div id="sec-insta-car" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🚗 कार व्हिडिओज</span></div>
-      <div id="grid-sec-insta-car">
-        <div class="video-card"><div class="video-thumb">🚗</div><div class="video-info">Car Video 1 (Link नंतर जोडू)</div></div>
-        <div class="video-card"><div class="video-thumb">🚗</div><div class="video-info">Car Video 2 (Link नंतर जोडू)</div></div>
-      </div>
+      <div id="grid-sec-insta-car"></div>
     </div>
 
   </div>
 
+</div>
+
+<!-- MEDIA MODAL (Direct PDF & Video Viewer) -->
+<div id="mediaModal" class="media-modal">
+  <div class="modal-bar">
+    <span id="modalTitle">Media Preview</span>
+    <button class="modal-close" onclick="closeMediaModal()">✕ बंद करा</button>
+  </div>
+  <iframe id="modalFrame" class="modal-frame" src=""></iframe>
 </div>
 
 <!-- Google Forms Silent Submission -->
@@ -408,9 +525,149 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 <script>
 const FIXED_PASS = "Sun@0909";
-
-// तुमची Google Sheet Live CSV Link
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1F1Gq4x5AK_dga76L6Z65PKkgwY5DqaNdkxegNZPhCxo/gviz/tq?tqx=out:csv&sheet=Sheet1";
+
+let inactivityTimer;
+const INACTIVITY_LIMIT = 30 * 60 * 1000; // ३० मिनिटे
+
+/* --- ऑटो-लॉगआउट व युझर सिक्युरिटी टाइमर --- */
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  if (localStorage.getItem("loggedInUser")) {
+    inactivityTimer = setTimeout(() => {
+      alert("सुरक्षिततेसाठी ३० मिनिटांनंतर सत्र समाप्त झाले आहे. कृपया पुन्हा लॉगिन करा.");
+      handleLogout();
+    }, INACTIVITY_LIMIT);
+  }
+}
+['click', 'touchstart', 'mousemove', 'keydown', 'scroll'].forEach(evt => {
+  window.addEventListener(evt, resetInactivityTimer, { passive: true });
+});
+
+/* --- थीम स्विचर (Theme Switcher) --- */
+const themes = ['', 'light-theme', 'amoled-theme'];
+let currentThemeIndex = parseInt(localStorage.getItem('userThemeIndex') || '0');
+document.body.className = themes[currentThemeIndex];
+
+function switchTheme() {
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  document.body.className = themes[currentThemeIndex];
+  localStorage.setItem('userThemeIndex', currentThemeIndex);
+}
+
+/* --- थेट मीडिया व्ह्यूअर (PDF / Video Modal) --- */
+function openMediaViewer(url, title) {
+  if (!url) return;
+  const modal = document.getElementById("mediaModal");
+  const frame = document.getElementById("modalFrame");
+  document.getElementById("modalTitle").innerText = title || "दस्तऐवज पहा";
+
+  if (url.includes("drive.google.com")) {
+    let previewUrl = url.replace("/view", "/preview").replace("?usp=sharing", "");
+    frame.src = previewUrl;
+  } else if (url.includes("youtube.com/watch?v=")) {
+    let vidId = url.split("v=")[1].split("&")[0];
+    frame.src = "https://www.youtube.com/embed/" + vidId;
+  } else if (url.includes("youtu.be/")) {
+    let vidId = url.split("youtu.be/")[1].split("?")[0];
+    frame.src = "https://www.youtube.com/embed/" + vidId;
+  } else if (url.includes("instagram.com")) {
+    frame.src = url.split("?")[0] + "embed/";
+  } else {
+    window.open(url, '_blank', 'noopener,noreferrer');
+    return;
+  }
+  modal.style.display = "flex";
+}
+
+function closeMediaModal() {
+  const modal = document.getElementById("mediaModal");
+  const frame = document.getElementById("modalFrame");
+  frame.src = "";
+  modal.style.display = "none";
+}
+
+/* --- व्हॉट्सॲप स्मार्ट शेअरिंग (Direct WhatsApp Share) --- */
+function shareWhatsApp(e, title, url) {
+  if (e) e.stopPropagation();
+  const text = encodeURIComponent(`📌 *${title}*\nयेथून उघडा: ${url}\n\n_My Digital Library द्वारे शेअर केले_`);
+  window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+}
+
+/* --- क्विक कॉपी टूल (Quick Copy) --- */
+function copyText(val, label) {
+  navigator.clipboard.writeText(val).then(() => {
+    alert(`✅ ${label} कॉपी झाला: ${val}`);
+  }).catch(() => {
+    prompt("हा क्रमांक कॉपी करा:", val);
+  });
+}
+
+/* --- डेली टास्क मॅनेजर (Daily Planner) --- */
+function getTasks() {
+  return JSON.parse(localStorage.getItem('dailyTasks') || '[]');
+}
+
+function saveTasks(tasks) {
+  localStorage.setItem('dailyTasks', JSON.stringify(tasks));
+  renderTasks();
+}
+
+function renderTasks() {
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
+  const tasks = getTasks();
+  tasks.forEach((t, index) => {
+    const li = document.createElement("li");
+    li.className = "task-item" + (t.done ? " done" : "");
+    li.innerHTML = `
+      <span onclick="toggleTask(${index})" style="cursor:pointer;">${t.done ? '✓ ' : '○ '} ${t.text}</span>
+      <div class="task-actions">
+        <button onclick="deleteTask(${index})" title="हटवा">🗑️</button>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+}
+
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const val = input.value.trim();
+  if (!val) return;
+  const tasks = getTasks();
+  tasks.push({ text: val, done: false });
+  input.value = "";
+  saveTasks(tasks);
+}
+
+function toggleTask(index) {
+  const tasks = getTasks();
+  tasks[index].done = !tasks[index].done;
+  saveTasks(tasks);
+}
+
+function deleteTask(index) {
+  const tasks = getTasks();
+  tasks.splice(index, 1);
+  saveTasks(tasks);
+}
+
+/* --- रिअल-टाइम लाइव्ह शोध (Live Instant Search) --- */
+function filterCards() {
+  const query = document.getElementById("liveSearchInput").value.toLowerCase().trim();
+  const cards = document.querySelectorAll(".card-folder, .video-card");
+
+  cards.forEach(card => {
+    const title = card.querySelector(".title, .video-info");
+    if (!title) return;
+    const text = title.innerText.toLowerCase();
+    if (!query || text.includes(query)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
 
 function navTo(url) {
   if (url) {
@@ -427,6 +684,18 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("dashboard-section").style.display = "none";
   }
   loadSheetData();
+  renderTasks();
+  resetInactivityTimer();
+
+  // PWA Service Worker Registration
+  if ('serviceWorker' in navigator) {
+    const swCode = `
+      self.addEventListener('install', e => self.skipWaiting());
+      self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
+    `;
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+  }
 });
 
 function handleLogin() {
@@ -455,6 +724,7 @@ function handleLogin() {
 
   localStorage.setItem("loggedInUser", name);
   showDashboard(name);
+  resetInactivityTimer();
 }
 
 function showDashboard(name) {
@@ -466,6 +736,7 @@ function showDashboard(name) {
 }
 
 function handleLogout() {
+  clearTimeout(inactivityTimer);
   localStorage.removeItem("loggedInUser");
   document.getElementById("userName").value = "";
   document.getElementById("userMobile").value = "";
@@ -487,6 +758,7 @@ function openSection(sectionId, pushState = true) {
       history.pushState({ section: sectionId }, "", "#" + sectionId);
     }
   }
+  filterCards();
 }
 
 function backToMain(pushState = true) {
@@ -498,6 +770,7 @@ function backToMain(pushState = true) {
   if (pushState) {
     history.pushState({ section: 'main-menu' }, "", "#main");
   }
+  filterCards();
 }
 
 window.onpopstate = function(event) {
@@ -515,7 +788,7 @@ window.onpopstate = function(event) {
   }
 };
 
-/* Google Sheets मधून डेटा लोड करण्याचे सुरक्षित फंक्शन */
+/* Google Sheets मधून डायनॅमिक डेटा लोड करणे */
 async function loadSheetData() {
   try {
     const response = await fetch(SHEET_CSV_URL);
@@ -543,19 +816,28 @@ async function loadSheetData() {
           if (folderId.startsWith('sec-insta') || folderId === 'sec-youtube') {
             const vCard = document.createElement('div');
             vCard.className = 'video-card';
-            vCard.onclick = function() { navTo(url); };
             vCard.innerHTML = `
-              <div class="video-thumb">${icon}</div>
-              <div class="video-info">${title}</div>
+              <div class="video-thumb" onclick="openMediaViewer('${url}', '${title}')">${icon}</div>
+              <div class="video-info-box">
+                <span class="video-info" onclick="openMediaViewer('${url}', '${title}')">${title}</span>
+                <button class="card-share-btn" onclick="shareWhatsApp(event, '${title}', '${url}')">Share</button>
+              </div>
             `;
             container.appendChild(vCard);
           } else {
             const card = document.createElement('div');
             card.className = 'card-folder';
-            card.onclick = function() { navTo(url); };
+            card.onclick = function() {
+              if (url.includes('.pdf') || url.includes('drive.google.com')) {
+                openMediaViewer(url, title);
+              } else {
+                navTo(url);
+              }
+            };
             card.innerHTML = `
               <span class="icon">${icon}</span>
               <span class="title">${title}</span>
+              <button class="card-share-btn" onclick="shareWhatsApp(event, '${title}', '${url}')">Share</button>
             `;
             container.appendChild(card);
           }
