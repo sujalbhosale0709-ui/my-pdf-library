@@ -68,7 +68,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     </div>
     <div class="input-group">
       <label>पासवर्ड</label>
-      <input id="userPass" type="password" placeholder="पासवर्ड टाका">
+      <input id="userPass" type="password" placeholder="पासवर्ड टाक">
     </div>
     <button class="btn-primary" onclick="handleLogin()">लॉगिन करा →</button>
   </div>
@@ -80,7 +80,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       <button class="btn-logout" onclick="handleLogout()">Logout</button>
     </div>
 
-    <!-- MAIN MENU (४ मुख्य विभाग) -->
+    <!-- MAIN MENU (४ मुख्य फोल्डर्स) -->
     <div id="main-menu">
       <div class="header-box" style="margin-bottom: 15px;">
         <h2 style="font-size: 20px; color: #cbd5e1;">मुख्य विभाग</h2>
@@ -124,7 +124,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="navTo('https://www.irctc.co.in/eticket/booking/train-list')">
           <span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span>
         </div>
-        <!-- 4. आधार Service -->
+        <!-- 4. आधार Service (नवीन लिंक) -->
         <div class="card-folder" onclick="navTo('https://myaadhaar.uidai.gov.in/login')">
           <span class="icon">🪪</span><span class="title">आधार Service</span>
         </div>
@@ -172,7 +172,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="navTo('https://digitalsatbara.mahabhumi.gov.in/dslr')">
           <span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span>
         </div>
-        <!-- 16. PF Service -->
+        <!-- 16. PF Service (आता २ सब-फोल्डर उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-pf')">
           <span class="icon">📑</span><span class="title">PF Service</span>
         </div>
@@ -200,14 +200,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="navTo('https://www.cutout.pro/passport-photo-maker/upload')">
           <span class="icon">🖼️</span><span class="title">Passport Photo Maker</span>
         </div>
-        <!-- 23. HDHub4u Movies -->
+        <!-- 23. HDHub4u (२ सब-फोल्डर्स उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-hdhub')">
           <span class="icon">🎬</span><span class="title">HDHub4u Movies</span>
         </div>
       </div>
     </div>
 
-    <!-- SUB SECTION: PF Service -->
+    <!-- SUB SECTION: PF Service (२ सब-फोल्डर्स) -->
     <div id="sec-pf" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -223,7 +223,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- SUB SECTION: HDHub4u -->
+    <!-- SUB SECTION: HDHub4u (२ सब-फोल्डर्स) -->
     <div id="sec-hdhub" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -233,13 +233,13 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="navTo('https://hdhub4u.deal/')">
           <span class="icon">🌐</span><span class="title">HDHub4u</span>
         </div>
-        <div class="card-folder" onclick="void(0)">
+        <div class="card-folder" onclick="alert('Downloads Movie लवकरच जोडले जाईल!')">
           <span class="icon">📥</span><span class="title">Downloads Movie</span>
         </div>
       </div>
     </div>
 
-    <!-- SUB SECTION 1.1: YCMOU -->
+    <!-- SUB SECTION 1.1: YCMOU चे २ फोल्डर्स -->
     <div id="sec-ycmou" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -257,7 +257,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- SUB SECTION 1.2: Pi7 -->
+    <!-- SUB SECTION 1.2: Pi7 चे २ फोल्डर्स -->
     <div id="sec-pi7" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -306,7 +306,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- Group B & C -->
+    <!-- 6. Group B & C (५ सब-फोल्डर) -->
     <div id="sec-group-bc" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -321,7 +321,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- आरोग्य विभाग -->
+    <!-- 7. आरोग्य विभाग (५ सब-फोल्डर) -->
     <div id="sec-arogya" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -336,7 +336,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- RRB Railway -->
+    <!-- 8. RRB Railway (५ सब-फोल्डर) -->
     <div id="sec-rrb" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -351,7 +351,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- इतर भरती -->
+    <!-- 9. इतर भरती (५ सब-फोल्डर) -->
     <div id="sec-itar-bharti" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -366,7 +366,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- इंजिनिअरिंग विभाग -->
+    <!-- 10. इंजिनिअरिंग विभाग (५ विषय फोल्डर) -->
     <div id="sec-engg" class="sub-page">
       <div class="top-nav">
         <button class="btn-back" onclick="window.history.back()">← Back</button>
@@ -381,6 +381,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
+    <!-- इंजिनिअरिंग विषय सब-फोल्डर्स (प्रत्येकात ६ फोल्डर्स) -->
     <div id="sec-engg-m1" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📐 M1</span></div>
       <div class="grid-2">
@@ -441,7 +442,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
-    <!-- सॅनिटरी इन्स्पेक्टर -->
+    <!-- 11. सॅनिटरी इन्स्पेक्टर -->
     <div id="sec-sanitary" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🩺 Sanitary Course</span></div>
       <div class="grid-2">
@@ -452,6 +453,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       </div>
     </div>
 
+    <!-- सॅनिटरी इन्स्पेक्टर चे ६ सब-फोल्डर्स -->
     <div id="sec-sanitary-tech" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📁 Subject One Technical</span></div>
       <div class="grid-2">
@@ -488,92 +490,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">📸 Instagram Videos</span>
       </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="openSection('sec-insta-audio')">
-          <span class="icon">🎵</span>
-          <span class="title">ऑडिओ</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-insta-dress')">
-          <span class="icon">👔</span>
-          <span class="title">ड्रेस</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-insta-something')">
-          <span class="icon">✨</span>
-          <span class="title">समथिंग</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-insta-gym')">
-          <span class="icon">🏋️‍♂️</span>
-          <span class="title">जिम</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-insta-car')">
-          <span class="icon">🚗</span>
-          <span class="title">कार</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- इन्स्टाग्राम ५ फोल्डर्सचे व्हिडिओज -->
-    <div id="sec-insta-audio" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="window.history.back()">← Back</button>
-        <span class="page-heading">🎵 ऑडिओ व्हिडिओज</span>
-      </div>
       <div>
         <div class="video-card">
-          <div class="video-thumb">🎵</div>
-          <div class="video-info">Audio Video 1 (Link नंतर जोडू)</div>
+          <div class="video-thumb">📸</div>
+          <div class="video-info">Instagram Reel / Video 1 (Link नंतर जोडू)</div>
         </div>
-      </div>
-    </div>
-
-    <div id="sec-insta-dress" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="window.history.back()">← Back</button>
-        <span class="page-heading">👔 ड्रेस व्हिडिओज</span>
-      </div>
-      <div>
         <div class="video-card">
-          <div class="video-thumb">👔</div>
-          <div class="video-info">Dress Video 1 (Link नंतर जोडू)</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="sec-insta-something" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="window.history.back()">← Back</button>
-        <span class="page-heading">✨ समथिंग व्हिडिओज</span>
-      </div>
-      <div>
-        <div class="video-card">
-          <div class="video-thumb">✨</div>
-          <div class="video-info">Something Video 1 (Link नंतर जोडू)</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="sec-insta-gym" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="window.history.back()">← Back</button>
-        <span class="page-heading">🏋️‍♂️ जिम व्हिडिओज</span>
-      </div>
-      <div>
-        <div class="video-card">
-          <div class="video-thumb">🏋️‍♂️</div>
-          <div class="video-info">Gym Video 1 (Link नंतर जोडू)</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="sec-insta-car" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="window.history.back()">← Back</button>
-        <span class="page-heading">🚗 कार व्हिडिओज</span>
-      </div>
-      <div>
-        <div class="video-card">
-          <div class="video-thumb">🚗</div>
-          <div class="video-info">Car Video 1 (Link नंतर जोडू)</div>
+          <div class="video-thumb">📸</div>
+          <div class="video-info">Instagram Reel / Video 2 (Link नंतर जोडू)</div>
         </div>
       </div>
     </div>
@@ -590,8 +514,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 </form>
 
 <script>
-var FIXED_PASS = "Sun@0909";
+const FIXED_PASS = "Sun@0909";
 
+// नवीन टॅबमध्ये लिंक उघडणे
 function navTo(url) {
   if (url) {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -599,7 +524,7 @@ function navTo(url) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  var savedUser = localStorage.getItem("loggedInUser");
+  const savedUser = localStorage.getItem("loggedInUser");
   if (savedUser) {
     showDashboard(savedUser);
   } else {
@@ -609,9 +534,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function handleLogin() {
-  var name = document.getElementById("userName").value.trim();
-  var mobile = document.getElementById("userMobile").value.trim();
-  var pass = document.getElementById("userPass").value;
+  const name = document.getElementById("userName").value.trim();
+  const mobile = document.getElementById("userMobile").value.trim();
+  const pass = document.getElementById("userPass").value;
 
   if(!name || !mobile || !pass) {
     alert("कृपया सर्व माहिती भरा!");
@@ -630,7 +555,9 @@ function handleLogin() {
     document.getElementById("gname").value = name;
     document.getElementById("gmobile").value = mobile;
     document.getElementById("gform").submit();
-  } catch(e) {}
+  } catch(e) {
+    console.error(e);
+  }
 
   localStorage.setItem("loggedInUser", name);
   showDashboard(name);
@@ -653,14 +580,14 @@ function handleLogout() {
   document.getElementById("login-section").style.display = "block";
 }
 
-function openSection(sectionId, pushState) {
-  if (typeof pushState === 'undefined') pushState = true;
+// फोल्डर उघडणे आणि ब्राउझर हिस्टरीमध्ये नोंद करणे
+function openSection(sectionId, pushState = true) {
   document.getElementById("main-menu").style.display = "none";
-  var pages = document.getElementsByClassName("sub-page");
-  for (var i = 0; i < pages.length; i++) {
+  const pages = document.getElementsByClassName("sub-page");
+  for (let i = 0; i < pages.length; i++) {
     pages[i].style.display = "none";
   }
-  var target = document.getElementById(sectionId);
+  const target = document.getElementById(sectionId);
   if(target) {
     target.style.display = "block";
     if (pushState) {
@@ -669,10 +596,10 @@ function openSection(sectionId, pushState) {
   }
 }
 
-function backToMain(pushState) {
-  if (typeof pushState === 'undefined') pushState = true;
-  var pages = document.getElementsByClassName("sub-page");
-  for (var i = 0; i < pages.length; i++) {
+// मुख्य मेनूवर परत जाणे
+function backToMain(pushState = true) {
+  const pages = document.getElementsByClassName("sub-page");
+  for (let i = 0; i < pages.length; i++) {
     pages[i].style.display = "none";
   }
   document.getElementById("main-menu").style.display = "block";
@@ -681,8 +608,9 @@ function backToMain(pushState) {
   }
 }
 
+// मोबाईलच्या मूळ Back बटनाने मागील पेजवर जाणे
 window.onpopstate = function(event) {
-  var savedUser = localStorage.getItem("loggedInUser");
+  const savedUser = localStorage.getItem("loggedInUser");
   if (!savedUser) return;
 
   if (event.state && event.state.section) {
