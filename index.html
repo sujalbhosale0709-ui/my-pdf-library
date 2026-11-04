@@ -46,6 +46,23 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; }
 .video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
 .video-info { padding: 12px; font-size: 15px; font-weight: 600; }
+
+/* AI Floating Button */
+#ai-floating-btn { position: fixed; bottom: 25px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #48cae4, #7209b7); box-shadow: 0 4px 18px rgba(114, 9, 183, 0.6); display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 999; border: 2px solid #ffffff; transition: transform 0.2s; }
+#ai-floating-btn:active { transform: scale(0.92); }
+#ai-floating-btn span { font-size: 28px; }
+
+/* AI Popup Modal */
+#ai-modal { display: none; position: fixed; bottom: 95px; right: 15px; left: 15px; max-width: 470px; margin: 0 auto; background: #1c2541; border-radius: 16px; border: 2px solid #48cae4; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 1000; }
+.ai-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3a506b; padding-bottom: 8px; margin-bottom: 10px; }
+.ai-title { font-size: 16px; font-weight: bold; color: #48cae4; display: flex; align-items: center; gap: 6px; }
+.btn-close-ai { background: none; border: none; color: #cbd5e1; font-size: 20px; cursor: pointer; }
+#ai-status { font-size: 13px; color: #94a3b8; margin-bottom: 8px; font-style: italic; }
+#ai-response { font-size: 14px; line-height: 1.5; color: #ffffff; background: #0b132b; padding: 10px; border-radius: 10px; max-height: 160px; overflow-y: auto; margin-bottom: 12px; border: 1px solid #3a506b; }
+.ai-controls { display: flex; gap: 8px; }
+.btn-speak { flex: 1; padding: 10px; background: #7209b7; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.btn-speak.listening { background: #e63946; animation: pulse 1s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 </style>
 </head>
 <body>
@@ -264,6 +281,24 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 </div>
 
+<!-- AI FLOATING BUTTON -->
+<div id="ai-floating-btn" onclick="toggleAiModal()">
+  <span>✨</span>
+</div>
+
+<!-- AI MODAL -->
+<div id="ai-modal">
+  <div class="ai-header">
+    <div class="ai-title"><span>✨</span> Smart Portal Guide</div>
+    <button class="btn-close-ai" type="button" onclick="toggleAiModal()">✕</button>
+  </div>
+  <div id="ai-status">माईकवर टच करा आणि प्रश्न विचारा...</div>
+  <div id="ai-response">नमस्कार! मी या पोर्टलचा मदतनीस आहे. तुम्हाला कोणत्या फोल्डरवर जायचे आहे किंवा काय करायचे आहे ते विचारा.</div>
+  <div class="ai-controls">
+    <button id="micBtn" class="btn-speak" type="button" onclick="startVoiceRecognition()">🎙️ बोलून विचारा</button>
+  </div>
+</div>
+
 <script>
 const FIXED_PASS = "Sun@0909";
 
@@ -273,7 +308,6 @@ function navTo(url) {
   }
 }
 
-// पेज उघडताच आधी तपासणे
 window.onload = function() {
   const savedUser = localStorage.getItem("loggedInUser");
   if (savedUser) {
@@ -281,17 +315,14 @@ window.onload = function() {
   } else {
     document.getElementById("login-section").style.display = "block";
     document.getElementById("dashboard-section").style.display = "none";
+    document.getElementById("ai-floating-btn").style.display = "none";
   }
 };
 
 function handleLogin() {
-  const nameInput = document.getElementById("userName");
-  const mobileInput = document.getElementById("userMobile");
-  const passInput = document.getElementById("userPass");
-
-  const name = nameInput.value.trim();
-  const mobile = mobileInput.value.trim();
-  const pass = passInput.value.trim();
+  const name = document.getElementById("userName").value.trim();
+  const mobile = document.getElementById("userMobile").value.trim();
+  const pass = document.getElementById("userPass").value.trim();
 
   if(!name || !mobile || !pass) {
     alert("कृपया सर्व माहिती भरा!");
@@ -306,7 +337,6 @@ function handleLogin() {
     return;
   }
 
-  // गुगल फॉर्म बॅकग्राउंडला पाठवणे (लॉगिन अडकणार नाही)
   try {
     const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdA-51SyTkuRkT740k06N_Ou4-32FierqlNwbwPv_GynmXP-w/formResponse";
     const formData = new FormData();
@@ -315,7 +345,6 @@ function handleLogin() {
     fetch(formUrl, { method: "POST", mode: "no-cors", body: formData }).catch(function(){});
   } catch(e) {}
 
-  // थेट डॅशबोर्ड दाखवणे
   localStorage.setItem("loggedInUser", name);
   showDashboard(name);
 }
@@ -324,6 +353,7 @@ function showDashboard(name) {
   document.getElementById("welcomeText").innerText = "स्वागत आहे, " + name + "!";
   document.getElementById("login-section").style.display = "none";
   document.getElementById("dashboard-section").style.display = "block";
+  document.getElementById("ai-floating-btn").style.display = "flex";
   backToMain();
 }
 
@@ -333,6 +363,8 @@ function handleLogout() {
   document.getElementById("userMobile").value = "";
   document.getElementById("userPass").value = "";
   document.getElementById("dashboard-section").style.display = "none";
+  document.getElementById("ai-floating-btn").style.display = "none";
+  document.getElementById("ai-modal").style.display = "none";
   document.getElementById("login-section").style.display = "block";
 }
 
@@ -355,7 +387,23 @@ function backToMain() {
   }
   document.getElementById("main-menu").style.display = "block";
 }
-</script>
 
-</body>
-</html>
+/* ================= AI HELPER LOGIC ================= */
+
+function toggleAiModal() {
+  const modal = document.getElementById("ai-modal");
+  modal.style.display = (modal.style.display === "block") ? "none" : "block";
+}
+
+function getScreenContext() {
+  const activeSub = Array.from(document.getElementsByClassName("sub-page")).find(p => p.style.display === "block");
+  let currentSection = "मुख्य विभाग (Main Menu)";
+  let visibleButtons = [];
+
+  if (activeSub) {
+    const heading = activeSub.querySelector(".page-heading");
+    currentSection = heading ? heading.innerText : "सब-पेज";
+    const buttons = activeSub.querySelectorAll(".title");
+    buttons.forEach(b => visibleButtons.push(b.innerText.trim()));
+  } else {
+    const
