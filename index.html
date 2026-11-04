@@ -68,7 +68,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     </div>
     <div class="input-group">
       <label>पासवर्ड</label>
-      <input id="userPass" type="password" placeholder="पासवर्ड टाक">
+      <input id="userPass" type="password" placeholder="पासवर्ड टाका">
     </div>
     <button class="btn-primary" onclick="handleLogin()">लॉगिन करा →</button>
   </div>
@@ -108,97 +108,75 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 1: विविध WEBSITES (२२ सब-फोल्डर्स) -->
     <div id="sec-websites" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">🌐 विविध Websites</span>
       </div>
       <div class="grid-2">
-        <!-- 0. IRCTC Railway Ticket booking -->
         <div class="card-folder" onclick="navTo('https://www.irctc.co.in/eticket/booking/train-list')">
           <span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span>
         </div>
-        <!-- 1. Aadhar Service -->
         <div class="card-folder" onclick="navTo('https://tathya.uidai.gov.in/access/login?role=resident')">
           <span class="icon">🪪</span><span class="title">आधार Service</span>
         </div>
-        <!-- 2. PAN Service -->
         <div class="card-folder" onclick="navTo('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')">
           <span class="icon">💳</span><span class="title">PAN Service</span>
         </div>
-        <!-- 3. Voter Service -->
         <div class="card-folder" onclick="navTo('https://voters.eci.gov.in/login')">
           <span class="icon">🗳️</span><span class="title">Voter Service</span>
         </div>
-        <!-- 4. महा सारथी (तुमची नवीन अधिकृत लिंक) -->
         <div class="card-folder" onclick="navTo('https://mahasarathi.maharashtra.gov.in/home/landing')">
           <span class="icon">🏛️</span><span class="title">महा सारथी</span>
         </div>
-        <!-- 5. Driving Licence Service -->
         <div class="card-folder" onclick="navTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')">
           <span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span>
         </div>
-        <!-- 6. MahaDBT 2.0 (तुमची नवीन अधिकृत लिंक) -->
         <div class="card-folder" onclick="navTo('https://mahadbt2.maharashtra.gov.in/web/guest/home')">
           <span class="icon">🎓</span><span class="title">MahaDBT 2.0</span>
         </div>
-        <!-- 7. Ration Card -->
         <div class="card-folder" onclick="navTo('https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx')">
           <span class="icon">🌾</span><span class="title">Ration Card Service</span>
         </div>
-        <!-- 8. मनरेगा -->
         <div class="card-folder" onclick="navTo('https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels')">
           <span class="icon">⛏️</span><span class="title">मनरेगा योजना</span>
         </div>
-        <!-- 9. कामगार योजना -->
         <div class="card-folder" onclick="navTo('https://mahabocw.in/en/')">
           <span class="icon">👷</span><span class="title">कामगार योजना</span>
         </div>
-        <!-- 10. DigiLocker -->
         <div class="card-folder" onclick="navTo('https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en')">
           <span class="icon">📂</span><span class="title">DigiLocker</span>
         </div>
-        <!-- 11. Marksheet -->
         <div class="card-folder" onclick="navTo('https://boardmarksheet.maharashtra.gov.in/emarksheet/')">
           <span class="icon">📊</span><span class="title">मार्कशीट Service</span>
         </div>
-        <!-- 12. शेती कागदपत्रे -->
         <div class="card-folder" onclick="navTo('https://digitalsatbara.mahabhumi.gov.in/dslr')">
           <span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span>
         </div>
-        <!-- 13. PF Service -->
         <div class="card-folder" onclick="navTo('https://unifiedportal-mem.epfindia.gov.in/memberinterface/')">
           <span class="icon">📑</span><span class="title">PF Service</span>
         </div>
-        <!-- 14. Caste Validity -->
         <div class="card-folder" onclick="navTo('https://cvc.barti.in/home')">
           <span class="icon">📜</span><span class="title">Caste Validity</span>
         </div>
-        <!-- 15. DBATU University -->
         <div class="card-folder" onclick="navTo('https://u27342909.ct.sendgrid.net/ls/click?upn=u001.nwvd-2FCtPux50-2BkufzRNz4b2bKTiijGEuWnR8QFzWCWbqTuXKZWQh5eJAzMkHH1EfAVbY_ZeZkPPKGpocOXnC6pCili6lWA1jwF9qfKLfLoDFnk1H96rIdndNv-2F3cOAPJO3XnYRS3NYjNkxazHiR-2BN7nAo7N3h1atz52vG0zytH96yyh2BKXAYO1yAzPaK5SE-2FPFrIM2nfHg9EYs5j6O0aVybF-2BrL5pDHJbViT23-2FKF2qwtce5IdFg6LOPx7i0p0iI58E55SwdvpyktG8Idci9AcJ4Vw-3D-3D')">
           <span class="icon">🏫</span><span class="title">DBATU University</span>
         </div>
-        <!-- 16. YCMOU (सब-पेज उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-ycmou')">
           <span class="icon">📚</span>
           <span class="title">YCMOU Service</span>
         </div>
-        <!-- 17. Pi7 (सब-पेज उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-pi7')">
           <span class="icon">📑</span>
           <span class="title">Pi7 All PDF Service</span>
         </div>
-        <!-- 18. Light PDF -->
         <div class="card-folder" onclick="navTo('https://lightpdf.com/edit-pdf')">
           <span class="icon">✏️</span><span class="title">Pdf Edit / Light PDF</span>
         </div>
-        <!-- 19. Multiple Pages per Sheet -->
         <div class="card-folder" onclick="navTo('https://online2pdf.com/en/multiple-pages-per-sheet')">
           <span class="icon">📄</span><span class="title">Multiple Pages per Page</span>
         </div>
-        <!-- 20. Passport Photo Maker -->
         <div class="card-folder" onclick="navTo('https://www.cutout.pro/passport-photo-maker/upload')">
           <span class="icon">🖼️</span><span class="title">Passport Photo Maker</span>
         </div>
-        <!-- 21. HDHub4u Movies -->
         <div class="card-folder" onclick="navTo('https://hdhub4uhd.online/')">
           <span class="icon">🎬</span><span class="title">HDHub4u Movies</span>
         </div>
@@ -208,7 +186,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SUB SECTION 1.1: YCMOU चे २ फोल्डर्स -->
     <div id="sec-ycmou" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="openSection('sec-websites')">← Back</button>
+        <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">📚 YCMOU Service</span>
       </div>
       <div class="grid-2">
@@ -226,7 +204,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SUB SECTION 1.2: Pi7 चे २ फोल्डर्स -->
     <div id="sec-pi7" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="openSection('sec-websites')">← Back</button>
+        <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">📑 Pi7 Services</span>
       </div>
       <div class="grid-2">
@@ -244,7 +222,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 2: नोकरी विभाग (७ सब-फोल्डर्स) -->
     <div id="sec-nokari" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">💼 नोकरी विभाग</span>
       </div>
       <div class="grid-2">
@@ -261,7 +239,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 3: YouTube Saved Video Link -->
     <div id="sec-youtube" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">▶️ YouTube Videos</span>
       </div>
       <div>
@@ -279,7 +257,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 4: Instagram Saved Video Links -->
     <div id="sec-instagram" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">📸 Instagram Videos</span>
       </div>
       <div>
@@ -358,7 +336,8 @@ function showDashboard(name) {
   document.getElementById("welcomeText").innerText = "स्वागत आहे, " + name + "!";
   document.getElementById("login-section").style.display = "none";
   document.getElementById("dashboard-section").style.display = "block";
-  backToMain();
+  backToMain(false);
+  history.replaceState({ section: 'main-menu' }, "", "#main");
 }
 
 function handleLogout() {
@@ -370,7 +349,8 @@ function handleLogout() {
   document.getElementById("login-section").style.display = "block";
 }
 
-function openSection(sectionId) {
+// फोल्डर उघडणे आणि हिस्टरीमध्ये नोंद करणे
+function openSection(sectionId, pushState = true) {
   document.getElementById("main-menu").style.display = "none";
   const pages = document.getElementsByClassName("sub-page");
   for (let i = 0; i < pages.length; i++) {
@@ -379,17 +359,40 @@ function openSection(sectionId) {
   const target = document.getElementById(sectionId);
   if(target) {
     target.style.display = "block";
+    if (pushState) {
+      history.pushState({ section: sectionId }, "", "#" + sectionId);
+    }
   }
 }
 
-function backToMain() {
+// मुख्य मेनूवर परत येणे
+function backToMain(pushState = true) {
   const pages = document.getElementsByClassName("sub-page");
   for (let i = 0; i < pages.length; i++) {
     pages[i].style.display = "none";
   }
   document.getElementById("main-menu").style.display = "block";
+  if (pushState) {
+    history.pushState({ section: 'main-menu' }, "", "#main");
+  }
 }
+
+// फोन किंवा ब्राऊझरचे मूळ Back बटण दाबल्यावर घडणारी क्रिया
+window.onpopstate = function(event) {
+  const savedUser = localStorage.getItem("loggedInUser");
+  if (!savedUser) return;
+
+  if (event.state && event.state.section) {
+    if (event.state.section === 'main-menu') {
+      backToMain(false);
+    } else {
+      openSection(event.state.section, false);
+    }
+  } else {
+    backToMain(false);
+  }
+};
 </script>
 
 </body>
-          </html>
+</html>
