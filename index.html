@@ -20,8 +20,8 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
 .input-group input { width: 100%; padding: 13px; border-radius: 10px; border: 1px solid #3a506b; background: #0b132b; color: #fff; font-size: 15px; outline: none; }
 .input-group input:focus { border-color: #48cae4; }
-.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 10px; background: #0077b6; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-.btn-primary:hover { background: #0096c7; }
+.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 10px; background: #0077b6; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; }
+.btn-primary:active { background: #0096c7; }
 
 /* Dashboard Sections */
 #dashboard-section { display: none; }
@@ -31,7 +31,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 /* Grid Layouts */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; transition: transform 0.15s, background 0.15s; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; }
+.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .card-folder:active { transform: scale(0.96); background: #233154; border-color: #48cae4; }
 .card-folder .icon { font-size: 32px; margin-bottom: 8px; }
 .card-folder .title { font-size: 14px; font-weight: 600; line-height: 1.3; color: #ffffff; }
@@ -48,21 +48,17 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .video-info { padding: 12px; font-size: 15px; font-weight: 600; }
 
 /* AI Floating Button */
-#ai-floating-btn { position: fixed; bottom: 25px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #48cae4, #7209b7); box-shadow: 0 4px 18px rgba(114, 9, 183, 0.6); display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 999; border: 2px solid #ffffff; transition: transform 0.2s; }
-#ai-floating-btn:active { transform: scale(0.92); }
+#ai-floating-btn { position: fixed; bottom: 25px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #48cae4, #7209b7); box-shadow: 0 4px 18px rgba(114, 9, 183, 0.7); display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; border: 2px solid #ffffff; }
 #ai-floating-btn span { font-size: 28px; }
 
-/* AI Popup Modal */
-#ai-modal { display: none; position: fixed; bottom: 95px; right: 15px; left: 15px; max-width: 470px; margin: 0 auto; background: #1c2541; border-radius: 16px; border: 2px solid #48cae4; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 1000; }
+/* AI Modal */
+#ai-modal { display: none; position: fixed; bottom: 95px; right: 15px; left: 15px; max-width: 470px; margin: 0 auto; background: #1c2541; border-radius: 16px; border: 2px solid #48cae4; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 10000; }
 .ai-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3a506b; padding-bottom: 8px; margin-bottom: 10px; }
-.ai-title { font-size: 16px; font-weight: bold; color: #48cae4; display: flex; align-items: center; gap: 6px; }
+.ai-title { font-size: 16px; font-weight: bold; color: #48cae4; }
 .btn-close-ai { background: none; border: none; color: #cbd5e1; font-size: 20px; cursor: pointer; }
 #ai-status { font-size: 13px; color: #94a3b8; margin-bottom: 8px; font-style: italic; }
 #ai-response { font-size: 14px; line-height: 1.5; color: #ffffff; background: #0b132b; padding: 10px; border-radius: 10px; max-height: 160px; overflow-y: auto; margin-bottom: 12px; border: 1px solid #3a506b; }
-.ai-controls { display: flex; gap: 8px; }
-.btn-speak { flex: 1; padding: 10px; background: #7209b7; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
-.btn-speak.listening { background: #e63946; animation: pulse 1s infinite; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+.btn-speak { width: 100%; padding: 10px; background: #7209b7; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -87,14 +83,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       <label>पासवर्ड</label>
       <input id="userPass" type="password" placeholder="पासवर्ड टाका">
     </div>
-    <button class="btn-primary" type="button" onclick="handleLogin()">लॉगिन करा →</button>
+    <button class="btn-primary" type="button" onclick="doLogin()">लॉगिन करा →</button>
   </div>
 
   <!-- DASHBOARD SECTION -->
   <div id="dashboard-section">
     <div class="user-bar">
       <span id="welcomeText">Welcome!</span>
-      <button class="btn-logout" type="button" onclick="handleLogout()">Logout</button>
+      <button class="btn-logout" type="button" onclick="doLogout()">Logout</button>
     </div>
 
     <!-- MAIN MENU -->
@@ -282,128 +278,138 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 </div>
 
 <!-- AI FLOATING BUTTON -->
-<div id="ai-floating-btn" onclick="toggleAiModal()">
+<div id="ai-floating-btn" onclick="toggleAi()">
   <span>✨</span>
 </div>
 
 <!-- AI MODAL -->
 <div id="ai-modal">
   <div class="ai-header">
-    <div class="ai-title"><span>✨</span> Smart Portal Guide</div>
-    <button class="btn-close-ai" type="button" onclick="toggleAiModal()">✕</button>
+    <div class="ai-title">✨ Portal AI Guide</div>
+    <button class="btn-close-ai" type="button" onclick="toggleAi()">✕</button>
   </div>
-  <div id="ai-status">माईकवर टच करा आणि प्रश्न विचारा...</div>
-  <div id="ai-response">नमस्कार! मी या पोर्टलचा मदतनीस आहे. तुम्हाला कोणत्या फोल्डरवर जायचे आहे किंवा काय करायचे आहे ते विचारा.</div>
-  <div class="ai-controls">
-    <button id="micBtn" class="btn-speak" type="button" onclick="startVoiceRecognition()">🎙️ बोलून विचारा</button>
-  </div>
+  <div id="ai-status">माईकवर टच करा आणि बोला...</div>
+  <div id="ai-response">नमस्कार! मी या पोर्टलचा AI मदतनीस आहे. तुम्हाला कुठे जायचे आहे किंवा काय हवे आहे ते बोला.</div>
+  <button id="micBtn" class="btn-speak" type="button" onclick="startVoice()">🎙️ बोलून विचारा</button>
 </div>
 
 <script>
 const FIXED_PASS = "Sun@0909";
 
 function navTo(url) {
-  if (url) {
-    window.location.assign(url);
-  }
+  if (url) window.location.assign(url);
 }
 
-window.onload = function() {
-  const savedUser = localStorage.getItem("loggedInUser");
-  if (savedUser) {
-    showDashboard(savedUser);
-  } else {
-    document.getElementById("login-section").style.display = "block";
-    document.getElementById("dashboard-section").style.display = "none";
-    document.getElementById("ai-floating-btn").style.display = "none";
-  }
-};
-
-function handleLogin() {
+// लॉगिन फंक्शन (थेट आणि सुपरफास्ट)
+function doLogin() {
   const name = document.getElementById("userName").value.trim();
   const mobile = document.getElementById("userMobile").value.trim();
   const pass = document.getElementById("userPass").value.trim();
 
-  if(!name || !mobile || !pass) {
-    alert("कृपया सर्व माहिती भरा!");
+  if (!name || !mobile || !pass) {
+    alert("सर्व माहिती भरा!");
     return;
   }
-  if(!/^[0-9]{10}$/.test(mobile)) {
-    alert("कृपया योग्य 10-अंकी मोबाईल नंबर टाका!");
-    return;
-  }
-  if(pass !== FIXED_PASS) {
-    alert("चुकीचा पासवर्ड! पासवर्ड: Sun@0909 असा टाका.");
+  if (pass !== FIXED_PASS) {
+    alert("चुकीचा पासवर्ड! पासवर्ड Sun@0909 असा टाका.");
     return;
   }
 
-  try {
-    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdA-51SyTkuRkT740k06N_Ou4-32FierqlNwbwPv_GynmXP-w/formResponse";
-    const formData = new FormData();
-    formData.append("entry.1488944512", name);
-    formData.append("entry.494704437", mobile);
-    fetch(formUrl, { method: "POST", mode: "no-cors", body: formData }).catch(function(){});
-  } catch(e) {}
-
-  localStorage.setItem("loggedInUser", name);
-  showDashboard(name);
-}
-
-function showDashboard(name) {
-  document.getElementById("welcomeText").innerText = "स्वागत आहे, " + name + "!";
+  // डॅशबोर्ड दाखवा
   document.getElementById("login-section").style.display = "none";
   document.getElementById("dashboard-section").style.display = "block";
+  document.getElementById("welcomeText").innerText = "स्वागत आहे, " + name + "!";
   document.getElementById("ai-floating-btn").style.display = "flex";
   backToMain();
 }
 
-function handleLogout() {
-  localStorage.removeItem("loggedInUser");
-  document.getElementById("userName").value = "";
-  document.getElementById("userMobile").value = "";
-  document.getElementById("userPass").value = "";
+function doLogout() {
   document.getElementById("dashboard-section").style.display = "none";
   document.getElementById("ai-floating-btn").style.display = "none";
   document.getElementById("ai-modal").style.display = "none";
   document.getElementById("login-section").style.display = "block";
 }
 
-function openSection(sectionId) {
+function openSection(secId) {
   document.getElementById("main-menu").style.display = "none";
   const pages = document.getElementsByClassName("sub-page");
-  for (let i = 0; i < pages.length; i++) {
-    pages[i].style.display = "none";
-  }
-  const target = document.getElementById(sectionId);
-  if(target) {
-    target.style.display = "block";
-  }
+  for (let i = 0; i < pages.length; i++) pages[i].style.display = "none";
+  const target = document.getElementById(secId);
+  if (target) target.style.display = "block";
 }
 
 function backToMain() {
   const pages = document.getElementsByClassName("sub-page");
-  for (let i = 0; i < pages.length; i++) {
-    pages[i].style.display = "none";
-  }
+  for (let i = 0; i < pages.length; i++) pages[i].style.display = "none";
   document.getElementById("main-menu").style.display = "block";
 }
 
-/* ================= AI HELPER LOGIC ================= */
-
-function toggleAiModal() {
-  const modal = document.getElementById("ai-modal");
-  modal.style.display = (modal.style.display === "block") ? "none" : "block";
+/* AI LOGIC */
+function toggleAi() {
+  const m = document.getElementById("ai-modal");
+  m.style.display = (m.style.display === "block") ? "none" : "block";
 }
 
-function getScreenContext() {
-  const activeSub = Array.from(document.getElementsByClassName("sub-page")).find(p => p.style.display === "block");
-  let currentSection = "मुख्य विभाग (Main Menu)";
-  let visibleButtons = [];
+function startVoice() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) {
+    alert("तुमचा ब्राउझर व्हॉईस सपोर्ट करत नाही.");
+    return;
+  }
+  const rec = new SpeechRec();
+  rec.lang = "mr-IN";
+  
+  const status = document.getElementById("ai-status");
+  const micBtn = document.getElementById("micBtn");
+  
+  rec.onstart = function() {
+    micBtn.innerText = "🛑 ऐकत आहे...";
+    status.innerText = "बोला, मी ऐकत आहे...";
+  };
+  
+  rec.onresult = function(e) {
+    const speech = e.results[0][0].transcript;
+    status.innerText = "तुम्ही म्हणालात: " + speech;
+    answerUser(speech);
+  };
+  
+  rec.onend = function() {
+    micBtn.innerText = "🎙️ बोलून विचारा";
+  };
+  
+  rec.start();
+}
 
-  if (activeSub) {
-    const heading = activeSub.querySelector(".page-heading");
-    currentSection = heading ? heading.innerText : "सब-पेज";
-    const buttons = activeSub.querySelectorAll(".title");
-    buttons.forEach(b => visibleButtons.push(b.innerText.trim()));
+function answerUser(q) {
+  const resBox = document.getElementById("ai-response");
+  const text = q.toLowerCase();
+  let reply = "";
+
+  if (text.includes("आधार")) {
+    reply = "आधार कार्डसाठी 'विविध Websites' मध्ये जाऊन 'आधार Service' वर टच करा.";
+  } else if (text.includes("पॅन") || text.includes("pan")) {
+    reply = "पॅन कार्डसाठी 'विविध Websites' मधील 'PAN Service' वर टच करा.";
+  } else if (text.includes("रेल्वे") || text.includes("गाडी")) {
+    reply = "रेल्वे तिकीटासाठी 'विविध Websites' मधील 'रेल्वे Ticket booking' वर जा.";
+  } else if (text.includes("स्कॉलरशिप") || text.includes("dbt")) {
+    reply = "शिष्यवृत्तीसाठी 'MahaDBT 2.0' या पर्यायावर टच करा.";
+  } else if (text.includes("नोकरी") || text.includes("भरती")) {
+    reply = "भरतीसाठी मुख्य मेनूतील 'नोकरी विभाग' या पर्यायावर टच करा.";
+  } else if (text.includes("शेत") || text.includes("सातबारा")) {
+    reply = "शेतीसंबंधी कागदपत्रांसाठी 'शेतीची कागदपत्रे' पर्यायावर टच करा.";
   } else {
-    const
+    reply = "तुम्ही विचारलेले समजले. कृपया स्क्रीनवरील योग्य फोल्डर निवडा.";
+  }
+
+  resBox.innerText = reply;
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(reply);
+    utt.lang = "mr-IN";
+    window.speechSynthesis.speak(utt);
+  }
+}
+</script>
+
+</body>
+</html>
