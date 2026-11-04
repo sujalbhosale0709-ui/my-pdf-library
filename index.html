@@ -6,269 +6,6 @@
 <title>My Digital Library</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b132b; color: #ffffff; min-height: 100vh; padding: 20px 10px; }
-.container { max-width: 500px; margin: 0 auto; }
-
-/* Header & Card */
-.header-box { text-align: center; margin-bottom: 25px; }
-.header-box h1 { font-size: 26px; color: #48cae4; margin-bottom: 5px; }
-.header-box p { font-size: 14px; color: #94a3b8; }
-
-/* Login Box */
-#login-section { background: #1c2541; padding: 25px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); border: 1px solid #3a506b; }
-.input-group { margin-bottom: 15px; }
-.input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
-.input-group input { width: 100%; padding: 13px; border-radius: 10px; border: 1px solid #3a506b; background: #0b132b; color: #fff; font-size: 15px; outline: none; }
-.input-group input:focus { border-color: #48cae4; }
-.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 10px; background: #0077b6; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-.btn-primary:hover { background: #0096c7; }
-
-/* Dashboard Sections */
-#dashboard-section { display: none; }
-.user-bar { display: flex; justify-content: space-between; align-items: center; background: #1c2541; padding: 12px 18px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #3a506b; }
-.user-bar span { color: #48cae4; font-weight: bold; font-size: 15px; }
-.btn-logout { background: #e63946; color: white; border: none; padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
-
-/* Grid Layouts */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; transition: transform 0.15s, background 0.15s; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; }
-.card-folder:active { transform: scale(0.96); background: #233154; border-color: #48cae4; }
-.card-folder .icon { font-size: 32px; margin-bottom: 8px; }
-.card-folder .title { font-size: 14px; font-weight: 600; line-height: 1.3; color: #ffffff; }
-
-/* Sub Pages */
-.sub-page { display: none; }
-.top-nav { display: flex; align-items: center; margin-bottom: 18px; gap: 12px; }
-.btn-back { background: #3a506b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold; }
-.page-heading { font-size: 18px; color: #48cae4; font-weight: bold; }
-
-/* Video Cards */
-.video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; }
-.video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
-.video-info { padding: 12px; font-size: 15px; font-weight: 600; }
-</style>
-</head>
-<body>
-
-<div class="container">
-
-  <!-- LOGIN PAGE -->
-  <div id="login-section">
-    <div class="header-box">
-      <h1>📚 Digital Portal</h1>
-      <p>तुमचे नाव, मोबाईल आणि पासवर्ड टाकून लॉगिन करा</p>
-    </div>
-    <div class="input-group">
-      <label>पूर्ण नाव</label>
-      <input id="userName" type="text" placeholder="उदा. Sujal Bhosle">
-    </div>
-    <div class="input-group">
-      <label>मोबाईल नंबर</label>
-      <input id="userMobile" type="tel" maxlength="10" placeholder="10 अंकी मोबाईल नंबर">
-    </div>
-    <div class="input-group">
-      <label>पासवर्ड</label>
-      <input id="userPass" type="password" placeholder="पासवर्ड टाक">
-    </div>
-    <button class="btn-primary" onclick="handleLogin()">लॉगिन करा →</button>
-  </div>
-
-  <!-- DASHBOARD SECTION -->
-  <div id="dashboard-section">
-    <div class="user-bar">
-      <span id="welcomeText">Welcome!</span>
-      <button class="btn-logout" onclick="handleLogout()">Logout</button>
-    </div>
-
-    <!-- MAIN MENU (४ मुख्य फोल्डर्स) -->
-    <div id="main-menu">
-      <div class="header-box" style="margin-bottom: 15px;">
-        <h2 style="font-size: 20px; color: #cbd5e1;">मुख्य विभाग</h2>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="openSection('sec-websites')">
-          <span class="icon">🌐</span>
-          <span class="title">विविध Websites</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-nokari')">
-          <span class="icon">💼</span>
-          <span class="title">नोकरी विभाग</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-youtube')">
-          <span class="icon">▶️</span>
-          <span class="title">YouTube Saved Video Link</span>
-        </div>
-        <div class="card-folder" onclick="openSection('sec-instagram')">
-          <span class="icon">📸</span>
-          <span class="title">Instagram Saved Video Links</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 1: विविध WEBSITES (२२ सब-फोल्डर्स) -->
-    <div id="sec-websites" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
-        <span class="page-heading">🌐 विविध Websites</span>
-      </div>
-      <div class="grid-2">
-        <!-- 0. IRCTC Railway Ticket booking -->
-        <div class="card-folder" onclick="navTo('https://www.irctc.co.in/eticket/booking/train-list')">
-          <span class="icon">🚆</span><span class="title">रेल्वे Ticket booking</span>
-        </div>
-        <!-- 1. Aadhar Service -->
-        <div class="card-folder" onclick="navTo('https://tathya.uidai.gov.in/access/login?role=resident')">
-          <span class="icon">🪪</span><span class="title">आधार Service</span>
-        </div>
-        <!-- 2. PAN Service -->
-        <div class="card-folder" onclick="navTo('https://onlineservices.proteantech.in/paam/endUserRegisterContact.html')">
-          <span class="icon">💳</span><span class="title">PAN Service</span>
-        </div>
-        <!-- 3. Voter Service -->
-        <div class="card-folder" onclick="navTo('https://voters.eci.gov.in/login')">
-          <span class="icon">🗳️</span><span class="title">Voter Service</span>
-        </div>
-        <!-- 4. महा सारथी (तुमची नवीन अधिकृत लिंक) -->
-        <div class="card-folder" onclick="navTo('https://mahasarathi.maharashtra.gov.in/home/landing')">
-          <span class="icon">🏛️</span><span class="title">महा सारथी</span>
-        </div>
-        <!-- 5. Driving Licence Service -->
-        <div class="card-folder" onclick="navTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')">
-          <span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span>
-        </div>
-        <!-- 6. MahaDBT 2.0 (तुमची नवीन अधिकृत लिंक) -->
-        <div class="card-folder" onclick="navTo('https://mahadbt2.maharashtra.gov.in/web/guest/home')">
-          <span class="icon">🎓</span><span class="title">MahaDBT 2.0</span>
-        </div>
-        <!-- 7. Ration Card -->
-        <div class="card-folder" onclick="navTo('https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx')">
-          <span class="icon">🌾</span><span class="title">Ration Card Service</span>
-        </div>
-        <!-- 8. मनरेगा -->
-        <div class="card-folder" onclick="navTo('https://mnregaweb2.dord.gov.in/netnrega/homestciti.aspx?state_code=18&state_name=MAHARASHTRA&lflag=eng&labels=labels')">
-          <span class="icon">⛏️</span><span class="title">मनरेगा योजना</span>
-        </div>
-        <!-- 9. कामगार योजना -->
-        <div class="card-folder" onclick="navTo('https://mahabocw.in/en/')">
-          <span class="icon">👷</span><span class="title">कामगार योजना</span>
-        </div>
-        <!-- 10. DigiLocker -->
-        <div class="card-folder" onclick="navTo('https://accounts.digilocker.gov.in/v3/7bb34681b6607f9bc6f83b8a8bd252b95269bf86800545d9ff69c0654a8b2091--en')">
-          <span class="icon">📂</span><span class="title">DigiLocker</span>
-        </div>
-        <!-- 11. Marksheet -->
-        <div class="card-folder" onclick="navTo('https://boardmarksheet.maharashtra.gov.in/emarksheet/')">
-          <span class="icon">📊</span><span class="title">मार्कशीट Service</span>
-        </div>
-        <!-- 12. शेती कागदपत्रे -->
-        <div class="card-folder" onclick="navTo('https://digitalsatbara.mahabhumi.gov.in/dslr')">
-          <span class="icon">🚜</span><span class="title">शेतीची कागदपत्रे</span>
-        </div>
-        <!-- 13. PF Service -->
-        <div class="card-folder" onclick="navTo('https://unifiedportal-mem.epfindia.gov.in/memberinterface/')">
-          <span class="icon">📑</span><span class="title">PF Service</span>
-        </div>
-        <!-- 14. Caste Validity -->
-        <div class="card-folder" onclick="navTo('https://cvc.barti.in/home')">
-          <span class="icon">📜</span><span class="title">Caste Validity</span>
-        </div>
-        <!-- 15. DBATU University -->
-        <div class="card-folder" onclick="navTo('https://u27342909.ct.sendgrid.net/ls/click?upn=u001.nwvd-2FCtPux50-2BkufzRNz4b2bKTiijGEuWnR8QFzWCWbqTuXKZWQh5eJAzMkHH1EfAVbY_ZeZkPPKGpocOXnC6pCili6lWA1jwF9qfKLfLoDFnk1H96rIdndNv-2F3cOAPJO3XnYRS3NYjNkxazHiR-2BN7nAo7N3h1atz52vG0zytH96yyh2BKXAYO1yAzPaK5SE-2FPFrIM2nfHg9EYs5j6O0aVybF-2BrL5pDHJbViT23-2FKF2qwtce5IdFg6LOPx7i0p0iI58E55SwdvpyktG8Idci9AcJ4Vw-3D-3D')">
-          <span class="icon">🏫</span><span class="title">DBATU University</span>
-        </div>
-        <!-- 16. YCMOU (सब-पेज उघडणारे) -->
-        <div class="card-folder" onclick="openSection('sec-ycmou')">
-          <span class="icon">📚</span>
-          <span class="title">YCMOU Service</span>
-        </div>
-        <!-- 17. Pi7 (सब-पेज उघडणारे) -->
-        <div class="card-folder" onclick="openSection('sec-pi7')">
-          <span class="icon">📑</span>
-          <span class="title">Pi7 All PDF Service</span>
-        </div>
-        <!-- 18. Light PDF -->
-        <div class="card-folder" onclick="navTo('https://lightpdf.com/edit-pdf')">
-          <span class="icon">✏️</span><span class="title">Pdf Edit / Light PDF</span>
-        </div>
-        <!-- 19. Multiple Pages per Sheet -->
-        <div class="card-folder" onclick="navTo('https://online2pdf.com/en/multiple-pages-per-sheet')">
-          <span class="icon">📄</span><span class="title">Multiple Pages per Page</span>
-        </div>
-        <!-- 20. Passport Photo Maker -->
-        <div class="card-folder" onclick="navTo('https://www.cutout.pro/passport-photo-maker/upload')">
-          <span class="icon">🖼️</span><span class="title">Passport Photo Maker</span>
-        </div>
-        <!-- 21. HDHub4u Movies -->
-        <div class="card-folder" onclick="navTo('https://hdhub4uhd.online/')">
-          <span class="icon">🎬</span><span class="title">HDHub4u Movies</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUB SECTION 1.1: YCMOU चे २ फोल्डर्स -->
-    <div id="sec-ycmou" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="openSection('sec-websites')">← Back</button>
-        <span class="page-heading">📚 YCMOU Service</span>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="navTo('https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU')">
-          <span class="icon">📝</span>
-          <span class="title">Admission</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://ycmou.digitaluniversity.ac/Content.aspx?ID=1497')">
-          <span class="icon">👨‍🎓</span>
-          <span class="title">Student Login</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUB SECTION 1.2: Pi7 चे २ फोल्डर्स -->
-    <div id="sec-pi7" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="openSection('sec-websites')">← Back</button>
-        <span class="page-heading">📑 Pi7 Services</span>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder" onclick="navTo('https://image.pi7.org/')">
-          <span class="icon">🖼️</span>
-          <span class="title">Pi7 Image Tools</span>
-        </div>
-        <div class="card-folder" onclick="navTo('https://pdf.pi7.org/')">
-          <span class="icon">📄</span>
-          <span class="title">Pi7 PDF Tools</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 2: नोकरी विभाग (७ सब-फोल्डर्स) -->
-    <div id="sec-nokari" class="sub-page">
-      <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
-        <span class="page-heading">💼 नोकरी विभाग</span>
-      </div>
-      <div class="grid-2">
-        <div class="card-folder"><span class="icon">📑</span><span class="title">Group B & C Combine</span></div>
-        <div class="card-folder"><span class="icon">🏥</span><span class="title">आरोग्य विभाग</span></div>
-        <div class="card-folder"><span class="icon">🚆</span><span class="title">RRB Railway</span></div>
-        <div class="card-folder"><span class="icon">📢</span><span class="title">इतर भरती</span></div>
-        <div class="card-folder"><span class="icon">⚙️</span><span class="title">इंजिनिअरिंग विभाग</span></div>
-        <div class="card-folder"><span class="icon">🩺</span><span class="title">Sanitary Course College</span></div>
-        <div class="card-folder"><span class="icon">🔬</span><span class="title">B.Sc विभाग</span></div>
-      </div>
-    </div>
-
-    <!-- SECTION 3: YouTube Saved Video Link -->
-    <div id="sec-youtube" class="sub-page">
-      <div class="top-nav">
-<!DOCTYPE html>
-<html lang="mr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Digital Library</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b132b; color: #ffffff; min-height: 100vh; padding: 20px 10px; padding-bottom: 90px; }
 .container { max-width: 500px; margin: 0 auto; }
 
@@ -309,23 +46,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; }
 .video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
 .video-info { padding: 12px; font-size: 15px; font-weight: 600; }
-
-/* AI Floating Button */
-#ai-floating-btn { position: fixed; bottom: 25px; right: 20px; width: 62px; height: 62px; border-radius: 50%; background: linear-gradient(135deg, #48cae4, #7209b7); box-shadow: 0 4px 20px rgba(114, 9, 183, 0.6); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; border: 2px solid #ffffff; transition: transform 0.2s; }
-#ai-floating-btn:active { transform: scale(0.92); }
-#ai-floating-btn span { font-size: 28px; }
-
-/* AI Popup Modal */
-#ai-modal { display: none; position: fixed; bottom: 100px; right: 15px; left: 15px; max-width: 470px; margin: 0 auto; background: #1c2541; border-radius: 16px; border: 2px solid #48cae4; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 1000; }
-.ai-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3a506b; padding-bottom: 8px; margin-bottom: 10px; }
-.ai-title { font-size: 16px; font-weight: bold; color: #48cae4; display: flex; align-items: center; gap: 6px; }
-.btn-close-ai { background: none; border: none; color: #cbd5e1; font-size: 20px; cursor: pointer; }
-#ai-status { font-size: 13px; color: #94a3b8; margin-bottom: 8px; font-style: italic; }
-#ai-response { font-size: 14px; line-height: 1.5; color: #ffffff; background: #0b132b; padding: 10px; border-radius: 10px; max-height: 160px; overflow-y: auto; margin-bottom: 12px; border: 1px solid #3a506b; }
-.ai-controls { display: flex; gap: 8px; }
-.btn-speak { flex: 1; padding: 10px; background: #7209b7; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
-.btn-speak.listening { background: #e63946; animation: pulse 1s infinite; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 </style>
 </head>
 <body>
@@ -544,24 +264,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 </div>
 
-<!-- AI FLOATING BUTTON -->
-<div id="ai-floating-btn" onclick="toggleAiModal()" style="display: none;">
-  <span>✨</span>
-</div>
-
-<!-- AI MODAL -->
-<div id="ai-modal">
-  <div class="ai-header">
-    <div class="ai-title"><span>✨</span> Gemini AI Support</div>
-    <button class="btn-close-ai" onclick="toggleAiModal()">✕</button>
-  </div>
-  <div id="ai-status">माईकवर टच करा आणि प्रश्न विचारा...</div>
-  <div id="ai-response">नमस्कार! मी तुमची मदत करण्यासाठी तयार आहे. स्क्रीनवर काय करायचे आहे ते विचारा.</div>
-  <div class="ai-controls">
-    <button id="micBtn" class="btn-speak" onclick="startVoiceRecognition()">🎙️ बोलून विचारा</button>
-  </div>
-</div>
-
 <!-- Google Forms Silent Submission -->
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 <form id="gform" action="https://docs.google.com/forms/d/e/1FAIpQLSdA-51SyTkuRkT740k06N_Ou4-32FierqlNwbwPv_GynmXP-w/formResponse" method="POST" target="hidden_iframe" style="display:none;">
@@ -571,7 +273,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 <script>
 const FIXED_PASS = "Sun@0909";
-const GEMINI_API_KEY = "AQ.Ab8RN6LHn-gDp900LBjBOqtaAer_593l7qK1CMavoJu-VtKI7A";
 
 function navTo(url) {
   if (url) {
@@ -586,7 +287,6 @@ document.addEventListener("DOMContentLoaded", function() {
   } else {
     document.getElementById("login-section").style.display = "block";
     document.getElementById("dashboard-section").style.display = "none";
-    document.getElementById("ai-floating-btn").style.display = "none";
   }
 });
 
@@ -624,7 +324,6 @@ function showDashboard(name) {
   document.getElementById("welcomeText").innerText = "स्वागत आहे, " + name + "!";
   document.getElementById("login-section").style.display = "none";
   document.getElementById("dashboard-section").style.display = "block";
-  document.getElementById("ai-floating-btn").style.display = "flex";
   backToMain();
 }
 
@@ -634,8 +333,6 @@ function handleLogout() {
   document.getElementById("userMobile").value = "";
   document.getElementById("userPass").value = "";
   document.getElementById("dashboard-section").style.display = "none";
-  document.getElementById("ai-floating-btn").style.display = "none";
-  document.getElementById("ai-modal").style.display = "none";
   document.getElementById("login-section").style.display = "block";
 }
 
@@ -658,18 +355,7 @@ function backToMain() {
   }
   document.getElementById("main-menu").style.display = "block";
 }
+</script>
 
-/* ================= GEMINI AI LOGIC ================= */
-
-function toggleAiModal() {
-  const modal = document.getElementById("ai-modal");
-  modal.style.display = (modal.style.display === "block") ? "none" : "block";
-}
-
-function getScreenContext() {
-  const activeSub = Array.from(document.getElementsByClassName("sub-page")).find(p => p.style.display === "block");
-  let currentSection = "मुख्य मेनू";
-  let visibleButtons = [];
-
-  if (activeSub) {
-    const heading = activeSub.querySelector(".page-heading")
+</body>
+</html>
