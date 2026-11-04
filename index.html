@@ -9,7 +9,7 @@
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b132b; color: #ffffff; min-height: 100vh; padding: 20px 10px; padding-bottom: 90px; }
 .container { max-width: 500px; margin: 0 auto; }
 
-/* Header & Card */
+/* Header */
 .header-box { text-align: center; margin-bottom: 25px; }
 .header-box h1 { font-size: 26px; color: #48cae4; margin-bottom: 5px; }
 .header-box p { font-size: 14px; color: #94a3b8; }
@@ -70,14 +70,14 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
       <label>पासवर्ड</label>
       <input id="userPass" type="password" placeholder="पासवर्ड टाका">
     </div>
-    <button class="btn-primary" onclick="handleLogin()">लॉगिन करा →</button>
+    <button class="btn-primary" type="button" onclick="handleLogin()">लॉगिन करा →</button>
   </div>
 
   <!-- DASHBOARD SECTION -->
   <div id="dashboard-section">
     <div class="user-bar">
       <span id="welcomeText">Welcome!</span>
-      <button class="btn-logout" onclick="handleLogout()">Logout</button>
+      <button class="btn-logout" type="button" onclick="handleLogout()">Logout</button>
     </div>
 
     <!-- MAIN MENU -->
@@ -108,7 +108,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 1: विविध WEBSITES -->
     <div id="sec-websites" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
         <span class="page-heading">🌐 विविध Websites</span>
       </div>
       <div class="grid-2">
@@ -186,7 +186,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SUB SECTION 1.1: YCMOU -->
     <div id="sec-ycmou" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="openSection('sec-websites')">← Back</button>
+        <button class="btn-back" type="button" onclick="openSection('sec-websites')">← Back</button>
         <span class="page-heading">📚 YCMOU Service</span>
       </div>
       <div class="grid-2">
@@ -202,7 +202,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SUB SECTION 1.2: Pi7 -->
     <div id="sec-pi7" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="openSection('sec-websites')">← Back</button>
+        <button class="btn-back" type="button" onclick="openSection('sec-websites')">← Back</button>
         <span class="page-heading">📑 Pi7 Services</span>
       </div>
       <div class="grid-2">
@@ -218,7 +218,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 2: नोकरी विभाग -->
     <div id="sec-nokari" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
         <span class="page-heading">💼 नोकरी विभाग</span>
       </div>
       <div class="grid-2">
@@ -235,7 +235,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 3: YouTube Videos -->
     <div id="sec-youtube" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
         <span class="page-heading">▶️ YouTube Videos</span>
       </div>
       <div>
@@ -249,7 +249,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- SECTION 4: Instagram Videos -->
     <div id="sec-instagram" class="sub-page">
       <div class="top-nav">
-        <button class="btn-back" onclick="backToMain()">← Back</button>
+        <button class="btn-back" type="button" onclick="backToMain()">← Back</button>
         <span class="page-heading">📸 Instagram Videos</span>
       </div>
       <div>
@@ -264,13 +264,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 </div>
 
-<!-- Google Forms Silent Submission -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-<form id="gform" action="https://docs.google.com/forms/d/e/1FAIpQLSdA-51SyTkuRkT740k06N_Ou4-32FierqlNwbwPv_GynmXP-w/formResponse" method="POST" target="hidden_iframe" style="display:none;">
-  <input type="text" name="entry.1488944512" id="gname">
-  <input type="text" name="entry.494704437" id="gmobile">
-</form>
-
 <script>
 const FIXED_PASS = "Sun@0909";
 
@@ -280,7 +273,8 @@ function navTo(url) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+// पेज उघडताच आधी तपासणे
+window.onload = function() {
   const savedUser = localStorage.getItem("loggedInUser");
   if (savedUser) {
     showDashboard(savedUser);
@@ -288,12 +282,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("login-section").style.display = "block";
     document.getElementById("dashboard-section").style.display = "none";
   }
-});
+};
 
 function handleLogin() {
-  const name = document.getElementById("userName").value.trim();
-  const mobile = document.getElementById("userMobile").value.trim();
-  const pass = document.getElementById("userPass").value;
+  const nameInput = document.getElementById("userName");
+  const mobileInput = document.getElementById("userMobile");
+  const passInput = document.getElementById("userPass");
+
+  const name = nameInput.value.trim();
+  const mobile = mobileInput.value.trim();
+  const pass = passInput.value.trim();
 
   if(!name || !mobile || !pass) {
     alert("कृपया सर्व माहिती भरा!");
@@ -304,18 +302,20 @@ function handleLogin() {
     return;
   }
   if(pass !== FIXED_PASS) {
-    alert("चुकीचा पासवर्ड! पुन्हा प्रयत्न करा.");
+    alert("चुकीचा पासवर्ड! पासवर्ड: Sun@0909 असा टाका.");
     return;
   }
 
+  // गुगल फॉर्म बॅकग्राउंडला पाठवणे (लॉगिन अडकणार नाही)
   try {
-    document.getElementById("gname").value = name;
-    document.getElementById("gmobile").value = mobile;
-    document.getElementById("gform").submit();
-  } catch(e) {
-    console.error(e);
-  }
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdA-51SyTkuRkT740k06N_Ou4-32FierqlNwbwPv_GynmXP-w/formResponse";
+    const formData = new FormData();
+    formData.append("entry.1488944512", name);
+    formData.append("entry.494704437", mobile);
+    fetch(formUrl, { method: "POST", mode: "no-cors", body: formData }).catch(function(){});
+  } catch(e) {}
 
+  // थेट डॅशबोर्ड दाखवणे
   localStorage.setItem("loggedInUser", name);
   showDashboard(name);
 }
