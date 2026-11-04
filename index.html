@@ -397,11 +397,11 @@ function getCurrentScreenDetails() {
   if (activeSub) {
     const h = activeSub.querySelector(".page-heading");
     sec = h ? h.innerText : "सब-पेज";
-       activeSub.querySelectorAll(".title").forEach(t => items.push(t.innerText.trim()));
+        activeSub.querySelectorAll(".title").forEach(t => items.push(t.innerText.trim()));
   } else {
     document.querySelectorAll("#main-menu .title").forEach(t => items.push(t.innerText.trim()));
   }
-  return `वापरकर्ता सध्या '${sec}' या स्क्रीनवर आहे. समोर दिसणारे पर्याय: [${items.join(", ")}].`;
+  return "वापरकर्ता सध्या '" + sec + "' या स्क्रीनवर आहे. समोर दिसणारे पर्याय: [" + items.join(", ") + "].";
 }
 
 function startVoice() {
@@ -426,7 +426,7 @@ function startVoice() {
   
   rec.onstart = function() {
     micBtn.innerText = "🛑 ऐकत आहे...";
-    status.innerText = "तुमचा प्रश्न बोला...";
+    status.innerText = "बोला, मी ऐकत आहे...";
   };
   
   rec.onresult = function(e) {
@@ -454,13 +454,14 @@ async function askRealGemini(userQuestion, apiKey) {
   status.innerText = "Gemini विचार करत आहे...";
   const screenContext = getCurrentScreenDetails();
 
-  const promptText = `तुम्ही 'My Digital Library' चे AI मदतनीस आहात.
-सध्याची स्क्रीन: ${screenContext}
-प्रश्न: "${userQuestion}"
-स्क्रीनवरील बटन्स पाहून सोप्या मराठीत २-३ वाक्यांत उत्तर द्या. इतर प्रश्न विचारल्यास त्याचेही योग्य उत्तर मराठीत द्या.`;
+  const promptText = "तुम्ही 'My Digital Library' चे AI मदतनीस आहात.\n" +
+                     "स्क्रीनचे वर्णन: " + screenContext + "\n" +
+                     "प्रश्न: " + userQuestion + "\n" +
+                     "स्क्रीनवरील बटन्स पाहून सोप्या मराठीत २-३ वाक्यांत उत्तर द्या. इतर प्रश्न विचारल्यास त्याचेही योग्य उत्तर मराठीत द्या.";
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -496,5 +497,3 @@ function speakAnswer(text) {
 
 </body>
 </html>
-
-                               
