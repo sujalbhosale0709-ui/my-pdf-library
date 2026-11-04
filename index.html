@@ -128,16 +128,16 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="navTo('https://voters.eci.gov.in/login')">
           <span class="icon">🗳️</span><span class="title">Voter Service</span>
         </div>
-        <!-- 4. Maha ID / महा सारथी -->
-        <div class="card-folder" onclick="navTo('https://mahaone.maharashtra.gov.in/emIDAM/username.html?resid=7554')">
+        <!-- 4. महा सारथी (अपडेटेड लिंक) -->
+        <div class="card-folder" onclick="navTo('https://sarthi-mahadbt.maharashtra.gov.in/')">
           <span class="icon">🏛️</span><span class="title">महा सारथी</span>
         </div>
         <!-- 5. Driving Licence Service -->
         <div class="card-folder" onclick="navTo('https://sarathi.parivahan.gov.in/sarathiservice/stateSelection.do')">
           <span class="icon">🚗</span><span class="title">ड्रायव्हिंग लायसन</span>
         </div>
-        <!-- 6. MahaDBT 2.0 -->
-        <div class="card-folder" onclick="navTo('https://mahaone.maharashtra.gov.in/emIDAM/username.html?resid=893')">
+        <!-- 6. MahaDBT 2.0 (अपडेटेड लिंक) -->
+        <div class="card-folder" onclick="navTo('https://mahadbt.maharashtra.gov.in/')">
           <span class="icon">🎓</span><span class="title">MahaDBT 2.0</span>
         </div>
         <!-- 7. Ration Card -->
@@ -178,13 +178,11 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         </div>
         <!-- 16. YCMOU (सब-पेज उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-ycmou')">
-          <span class="icon">📚</span>
-          <span class="title">YCMOU Service</span>
+          <span class="icon">📚</span><span class="title">YCMOU Service</span>
         </div>
         <!-- 17. Pi7 (सब-पेज उघडणारे) -->
         <div class="card-folder" onclick="openSection('sec-pi7')">
-          <span class="icon">📑</span>
-          <span class="title">Pi7 All PDF Service</span>
+          <span class="icon">📑</span><span class="title">Pi7 All PDF Service</span>
         </div>
         <!-- 18. Light PDF -->
         <div class="card-folder" onclick="navTo('https://lightpdf.com/edit-pdf')">
@@ -308,7 +306,6 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 <script>
 const FIXED_PASS = "Sun@0909";
 
-// थेट वेबसाइटवर नेणारे फंक्शन
 function navTo(url) {
   if (url) {
     window.location.assign(url);
