@@ -460,7 +460,7 @@ async function askRealGemini(userQuestion, apiKey) {
                      "स्क्रीनवरील बटन्स पाहून सोप्या मराठीत २-३ वाक्यांत उत्तर द्या. इतर प्रश्न विचारल्यास त्याचेही योग्य उत्तर मराठीत द्या.";
 
   try {
-    const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
+    const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.0-flash:generateContent?key=" + apiKey;
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
