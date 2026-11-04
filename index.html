@@ -286,9 +286,10 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 <script>
 const FIXED_PASS = "Sun@0909";
 
+// नवीन टॅबमध्ये लिंक उघडण्यासाठी सुरक्षित फंक्शन
 function navTo(url) {
   if (url) {
-    window.location.assign(url);
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 }
 
@@ -349,7 +350,7 @@ function handleLogout() {
   document.getElementById("login-section").style.display = "block";
 }
 
-// फोल्डर उघडणे आणि हिस्टरीमध्ये नोंद करणे
+// फोल्डर उघडणे आणि हिस्टरी सेव्ह करणे
 function openSection(sectionId, pushState = true) {
   document.getElementById("main-menu").style.display = "none";
   const pages = document.getElementsByClassName("sub-page");
@@ -365,7 +366,7 @@ function openSection(sectionId, pushState = true) {
   }
 }
 
-// मुख्य मेनूवर परत येणे
+// मुख्य मेनूवर परत जाणे
 function backToMain(pushState = true) {
   const pages = document.getElementsByClassName("sub-page");
   for (let i = 0; i < pages.length; i++) {
@@ -377,7 +378,7 @@ function backToMain(pushState = true) {
   }
 }
 
-// फोन किंवा ब्राऊझरचे मूळ Back बटण दाबल्यावर घडणारी क्रिया
+// मोबाईलच्या मूळ Back बटनाने मागील पेजवर जाणे
 window.onpopstate = function(event) {
   const savedUser = localStorage.getItem("loggedInUser");
   if (!savedUser) return;
