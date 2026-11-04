@@ -459,40 +459,36 @@ async function askRealGemini(userQuestion, apiKey) {
                      "प्रश्न: " + userQuestion + "\n" +
                      "स्क्रीनवरील बटन्स पाहून सोप्या मराठीत २-३ वाक्यांत उत्तर द्या. इतर प्रश्न विचारल्यास त्याचेही योग्य उत्तर मराठीत द्या.";
 
-  // गुगलने एररमध्ये मागितलेली नवीन मॉडेल्स
-  const activeModels = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
-  let success = false;
+  try {
+    const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: promptText }] }]
+      })
+    });
 
-  for (let modelName of activeModels) {
-    try {
-      const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/" + modelName + ":generateContent?key=" + apiKey;
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: promptText }] }]
-        })
-      });
+    const data = await response.json();
 
-      const data = await response.json();
-      if (data.candidates && data.candidates[0].content.parts[0].text) {
-        const reply = data.candidates[0].content.parts[0].text;
-        resBox.innerText = reply;
-        status.innerText = "Gemini चे उत्तर:";
-        speakAnswer(reply);
-        success = true;
-        break;
-      }
-    } catch (e) {
-      continue;
+    if (data.candidates && data.candidates[0].content.parts[0].text) {
+      const reply = data.candidates[0].content.parts[0].text;
+      resBox.innerText = reply;
+      status.innerText = "Gemini चे उत्तर:";
+      speakAnswer(reply);
+    } else if (data.error) {
+      resBox.innerText = "Google त्रुटी (" + data.error.code + "): " + data.error.message;
+      status.innerText = "त्रुटी आली!";
+    } else {
+      resBox.innerText = "उत्तर मिळाले नाही: " + JSON.stringify(data);
+      status.innerText = "अडचण आली!";
     }
-  }
-
-  if (!success) {
-    resBox.innerText = "कोणतेही मॉडेल जोडले गेले नाही. कृपया तुमची API Key तपासा.";
-    status.innerText = "त्रुटी आली!";
+  } catch (err) {
+    resBox.innerText = "नेटवर्क किंवा ब्राऊझर एरर: " + err.message;
+    status.innerText = "एरर!";
   }
 }
+
 
 function speakAnswer(text) {
   if ('speechSynthesis' in window) {
