@@ -31,10 +31,13 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
 /* Grid Layouts */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; transition: transform 0.15s, background 0.15s; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; }
+.card-folder { background: #1c2541; padding: 20px 10px; border-radius: 14px; text-align: center; cursor: pointer; border: 1px solid #3a506b; transition: transform 0.15s, background 0.15s; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none; text-decoration: none; position: relative; }
 .card-folder:active { transform: scale(0.96); background: #233154; border-color: #48cae4; }
 .card-folder .icon { font-size: 32px; margin-bottom: 8px; }
 .card-folder .title { font-size: 14px; font-weight: 600; line-height: 1.3; color: #ffffff; }
+
+/* Live Badge for Dynamic Links */
+.live-badge { position: absolute; top: 6px; right: 8px; font-size: 9px; background: #0284c7; color: #e0f2fe; padding: 2px 5px; border-radius: 4px; font-weight: bold; }
 
 /* Sub Pages */
 .sub-page { display: none; }
@@ -43,7 +46,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 .page-heading { font-size: 18px; color: #48cae4; font-weight: bold; }
 
 /* Video Cards */
-.video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; }
+.video-card { background: #1c2541; border-radius: 14px; overflow: hidden; border: 1px solid #3a506b; cursor: pointer; color: white; margin-bottom: 15px; display: block; text-decoration: none; }
 .video-thumb { width: 100%; height: 160px; background: #0b132b; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; border-bottom: 1px solid #3a506b; }
 .video-info { padding: 12px; font-size: 15px; font-weight: 600; }
 </style>
@@ -111,7 +114,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">🌐 विविध Websites</span>
       </div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-websites">
         <!-- 1. CSC Service -->
         <div class="card-folder" onclick="navTo('https://aaplesarkar.mahaonline.gov.in/en/Login/Login')">
           <span class="icon">🏢</span><span class="title">CSC Service</span>
@@ -213,7 +216,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">📑 PF Service</span>
       </div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-pf">
         <div class="card-folder" onclick="navTo('https://unifiedportal-mem.epfindia.gov.in/memberinterface/')">
           <span class="icon">🔐</span><span class="title">PF Login</span>
         </div>
@@ -229,7 +232,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">🎬 HDHub4u Movies</span>
       </div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-hdhub">
         <div class="card-folder" onclick="navTo('https://hdhub4u.deal/')">
           <span class="icon">🌐</span><span class="title">HDHub4u</span>
         </div>
@@ -245,7 +248,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">📚 YCMOU Service</span>
       </div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-ycmou">
         <div class="card-folder" onclick="navTo('https://ycmouadm.dulive.ac/applicant/#/login?client=YCMOU')">
           <span class="icon">📝</span><span class="title">Admission</span>
         </div>
@@ -261,7 +264,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">📑 Pi7 Services</span>
       </div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-pi7">
         <div class="card-folder" onclick="navTo('https://image.pi7.org/')">
           <span class="icon">🖼️</span><span class="title">Pi7 Image Tools</span>
         </div>
@@ -277,7 +280,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">💼 नोकरी विभाग</span>
       </div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-nokari">
         <div class="card-folder" onclick="openSection('sec-group-bc')">
           <span class="icon">📑</span><span class="title">Group B & C Combine</span>
         </div>
@@ -296,7 +299,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <div class="card-folder" onclick="openSection('sec-sanitary')">
           <span class="icon">🩺</span><span class="title">Sanitary Inspector</span>
         </div>
-        <div class="card-folder">
+        <div class="card-folder" id="sec-bsc">
           <span class="icon">🔬</span><span class="title">B.Sc विभाग</span>
         </div>
       </div>
@@ -305,7 +308,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- Group B & C (५ सब-फोल्डर) -->
     <div id="sec-group-bc" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📑 Group B & C</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-group-bc">
         <div class="card-folder"><span class="icon">🌐</span><span class="title">इम्पॉर्टंट वेबसाईट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">पीडीएफ</span></div>
         <div class="card-folder"><span class="icon">💾</span><span class="title">Saved व्हिडिओज</span></div>
@@ -317,7 +320,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- आरोग्य विभाग (५ सब-फोल्डर) -->
     <div id="sec-arogya" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🏥 आरोग्य विभाग</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-arogya">
         <div class="card-folder"><span class="icon">🌐</span><span class="title">इम्पॉर्टंट वेबसाईट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">पीडीएफ</span></div>
         <div class="card-folder"><span class="icon">💾</span><span class="title">Saved व्हिडिओज</span></div>
@@ -329,7 +332,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- RRB Railway (५ सब-फोल्डर) -->
     <div id="sec-rrb" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🚆 RRB Railway</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-rrb">
         <div class="card-folder"><span class="icon">🌐</span><span class="title">इम्पॉर्टंट वेबसाईट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">पीडीएफ</span></div>
         <div class="card-folder"><span class="icon">💾</span><span class="title">Saved व्हिडिओज</span></div>
@@ -341,7 +344,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- इतर भरती (५ सब-फोल्डर) -->
     <div id="sec-itar-bharti" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📢 इतर भरती</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-itar-bharti">
         <div class="card-folder"><span class="icon">🌐</span><span class="title">इम्पॉर्टंट वेबसाईट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">पीडीएफ</span></div>
         <div class="card-folder"><span class="icon">💾</span><span class="title">Saved व्हिडिओज</span></div>
@@ -353,7 +356,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- इंजिनिअरिंग विभाग -->
     <div id="sec-engg" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">⚙️ इंजिनिअरिंग विभाग</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-engg">
         <div class="card-folder" onclick="openSection('sec-engg-m1')"><span class="icon">📐</span><span class="title">M1</span></div>
         <div class="card-folder" onclick="openSection('sec-engg-phy')"><span class="icon">🧲</span><span class="title">फिजिक्स</span></div>
         <div class="card-folder" onclick="openSection('sec-engg-graph')"><span class="icon">✏️</span><span class="title">ग्राफिक्स</span></div>
@@ -365,7 +368,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- इंजिनिअरिंग सब-फोल्डर्स (प्रत्येकी ६ सब-फोल्डर्स) -->
     <div id="sec-engg-m1" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📐 M1</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-engg-m1">
         <div class="card-folder"><span class="icon">📝</span><span class="title">असाइनमेंट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">PYQ</span></div>
         <div class="card-folder"><span class="icon">⭐</span><span class="title">युनिट वाईज आयएमपी डॉक्युमेंट</span></div>
@@ -377,7 +380,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-engg-phy" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🧲 फिजिक्स</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-engg-phy">
         <div class="card-folder"><span class="icon">📝</span><span class="title">असाइनमेंट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">PYQ</span></div>
         <div class="card-folder"><span class="icon">⭐</span><span class="title">युनिट वाईज आयएमपी डॉक्युमेंट</span></div>
@@ -389,7 +392,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-engg-graph" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">✏️ ग्राफिक्स</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-engg-graph">
         <div class="card-folder"><span class="icon">📝</span><span class="title">असाइनमेंट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">PYQ</span></div>
         <div class="card-folder"><span class="icon">⭐</span><span class="title">युनिट वाईज आयएमपी डॉक्युमेंट</span></div>
@@ -401,7 +404,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-engg-bee" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">⚡ BEE</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-engg-bee">
         <div class="card-folder"><span class="icon">📝</span><span class="title">असाइनमेंट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">PYQ</span></div>
         <div class="card-folder"><span class="icon">⭐</span><span class="title">युनिट वाईज आयएमपी डॉक्युमेंट</span></div>
@@ -413,7 +416,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-engg-civil" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🏗️ सिव्हिल इंजिनिअरिंग</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-engg-civil">
         <div class="card-folder"><span class="icon">📝</span><span class="title">असाइनमेंट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">PYQ</span></div>
         <div class="card-folder"><span class="icon">⭐</span><span class="title">युनिट वाईज आयएमपी डॉक्युमेंट</span></div>
@@ -426,7 +429,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- सॅनिटरी इन्स्पेक्टर -->
     <div id="sec-sanitary" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🩺 Sanitary Course</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-sanitary">
         <div class="card-folder" onclick="openSection('sec-sanitary-tech')">
           <span class="icon">📁</span>
           <span class="title">Subject One Technical</span>
@@ -436,7 +439,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-sanitary-tech" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">📁 Subject One Technical</span></div>
-      <div class="grid-2">
+      <div class="grid-2" id="grid-sec-sanitary-tech">
         <div class="card-folder"><span class="icon">📝</span><span class="title">असाइनमेंट</span></div>
         <div class="card-folder"><span class="icon">📄</span><span class="title">PYQ</span></div>
         <div class="card-folder"><span class="icon">⭐</span><span class="title">आयएमपी डॉक्युमेंट</span></div>
@@ -452,7 +455,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
         <button class="btn-back" onclick="window.history.back()">← Back</button>
         <span class="page-heading">▶️ YouTube Videos</span>
       </div>
-      <div>
+      <div id="grid-sec-youtube">
         <div class="video-card">
           <div class="video-thumb">▶️</div>
           <div class="video-info">YouTube Saved Video 1 (Link नंतर जोडू)</div>
@@ -497,7 +500,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
     <!-- इन्स्टाग्राम ५ फोल्डर्सचे स्वतंत्र व्हिडिओ बॉक्सेस -->
     <div id="sec-insta-audio" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🎵 ऑडिओ व्हिडिओज</span></div>
-      <div>
+      <div id="grid-sec-insta-audio">
         <div class="video-card"><div class="video-thumb">🎵</div><div class="video-info">Audio Video 1 (Link नंतर जोडू)</div></div>
         <div class="video-card"><div class="video-thumb">🎵</div><div class="video-info">Audio Video 2 (Link नंतर जोडू)</div></div>
       </div>
@@ -505,7 +508,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-insta-dress" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">👔 ड्रेस व्हिडिओज</span></div>
-      <div>
+      <div id="grid-sec-insta-dress">
         <div class="video-card"><div class="video-thumb">👔</div><div class="video-info">Dress Video 1 (Link नंतर जोडू)</div></div>
         <div class="video-card"><div class="video-thumb">👔</div><div class="video-info">Dress Video 2 (Link नंतर जोडू)</div></div>
       </div>
@@ -513,7 +516,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-insta-something" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">✨ समथिंग व्हिडिओज</span></div>
-      <div>
+      <div id="grid-sec-insta-something">
         <div class="video-card"><div class="video-thumb">✨</div><div class="video-info">Something Video 1 (Link नंतर जोडू)</div></div>
         <div class="video-card"><div class="video-thumb">✨</div><div class="video-info">Something Video 2 (Link नंतर जोडू)</div></div>
       </div>
@@ -521,7 +524,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-insta-gym" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🏋️‍♂️ जिम व्हिडिओज</span></div>
-      <div>
+      <div id="grid-sec-insta-gym">
         <div class="video-card"><div class="video-thumb">🏋️‍♂️</div><div class="video-info">Gym Video 1 (Link नंतर जोडू)</div></div>
         <div class="video-card"><div class="video-thumb">🏋️‍♂️</div><div class="video-info">Gym Video 2 (Link नंतर जोडू)</div></div>
       </div>
@@ -529,7 +532,7 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 
     <div id="sec-insta-car" class="sub-page">
       <div class="top-nav"><button class="btn-back" onclick="window.history.back()">← Back</button><span class="page-heading">🚗 कार व्हिडिओज</span></div>
-      <div>
+      <div id="grid-sec-insta-car">
         <div class="video-card"><div class="video-thumb">🚗</div><div class="video-info">Car Video 1 (Link नंतर जोडू)</div></div>
         <div class="video-card"><div class="video-thumb">🚗</div><div class="video-info">Car Video 2 (Link नंतर जोडू)</div></div>
       </div>
@@ -549,6 +552,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:
 <script>
 const FIXED_PASS = "Sun@0909";
 
+// तुमची अचूक Google Sheet Live CSV Link
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1F1Gq4x5AK_dga76L6Z65PKkgwY5DqaNdkxegNZPhCxo/gviz/tq?tqx=out:csv&sheet=Sheet1";
+
 function navTo(url) {
   if (url) {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -563,6 +569,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("login-section").style.display = "block";
     document.getElementById("dashboard-section").style.display = "none";
   }
+  // Google Sheet मधून डेटा आपोआप आणणे
+  loadSheetData();
 });
 
 function handleLogin() {
@@ -650,6 +658,62 @@ window.onpopstate = function(event) {
     backToMain(false);
   }
 };
+
+/* Google Sheets मधून डायनॅमिक डेटा लोड करण्याचे मुख्य फंक्शन */
+async function loadSheetData() {
+  try {
+    const response = await fetch(SHEET_CSV_URL);
+    if (!response.ok) return;
+    const csvText = await response.text();
+
+    const rows = csvText.split('\n').slice(1);
+
+    rows.forEach(row => {
+      if (!row.trim()) return;
+
+      // CSV चे रकाने सुरक्षित वेगळे करणे
+      const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => {
+        return col.replace(/^"(.*)"$/, '$1').trim();
+      });
+
+      const folderId = cols[0]; // उदा. sec-engg-m1 किंवा sec-insta-car
+      const title = cols[1];    // शीर्षक
+      const url = cols[2];      // खरी लिंक
+      const icon = cols[3] || '📄'; // इमोजी आयकॉन
+
+      if (folderId && title && url) {
+        // प्रथम 'grid-[folderId]' किंवा थेट '[folderId]' आयडी शोधणे
+        const container = document.getElementById('grid-' + folderId) || document.getElementById(folderId);
+
+        if (container) {
+          // इन्स्टाग्राम किंवा यूट्यूब व्हिडिओ असल्यास व्हिडिओ कार्ड स्टाईल, अन्यथा नेहमीचे कार्ड
+          if (folderId.startsWith('sec-insta') || folderId === 'sec-youtube') {
+            const vCard = document.createElement('div');
+            vCard.className = 'video-card';
+            vCard.onclick = function() { navTo(url); };
+            vCard.innerHTML = `
+              <div class="video-thumb">${icon}</div>
+              <div class="video-info">${title}</div>
+            `;
+            container.appendChild(vCard);
+          } else {
+            const card = document.createElement('div');
+            card.className = 'card-folder';
+            card.onclick = function() { navTo(url); };
+            card.innerHTML = `
+              <span class="live-badge">Live</span>
+              <span class="icon">${icon}</span>
+              <span class="title">${title}</span>
+            `;
+            container.appendChild(card);
+          }
+        }
+      }
+    });
+  } catch (err) {
+    console.error("Sheet Sync Error:", err);
+  }
+}
 </script>
 
 </body>
