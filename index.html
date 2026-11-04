@@ -446,53 +446,45 @@ function startVoice() {
 
   rec.start();
 }
-
 async function askRealGemini(userQuestion, apiKey) {
   const status = document.getElementById("ai-status");
   const resBox = document.getElementById("ai-response");
 
-  status.innerText = "Gemini विचार करत आहे...";
+  status.innerText = "AI विचार करत आहे...";
   const screenContext = getCurrentScreenDetails();
 
-  const promptText = "तुम्ही 'My Digital Library' चे AI मदतनीस आहात.\n" +
-                     "स्क्रीनचे वर्णन: " + screenContext + "\n" +
-                     "प्रश्न: " + userQuestion + "\n" +
-                     "स्क्रीनवरील बटन्स पाहून सोप्या मराठीत २-३ वाक्यांत उत्तर द्या. इतर प्रश्न विचारल्यास त्याचेही योग्य उत्तर मराठीत द्या.";
+  const systemPrompt = "तुम्ही 'My Digital Library' चे मदतनीस आहात. स्क्रीनवरील बटन्स आणि संदर्भ पाहून विचारलेल्या प्रश्नाचे सोप्या आणि स्पष्ट मराठीत २-३ वाक्यांत उत्तर द्या.";
+  const fullPrompt = systemPrompt + "\nस्क्रीन: " + screenContext + "\nवापरकर्त्याचा प्रश्न: " + userQuestion;
 
   try {
-    const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.0-flash:generateContent?key=" + apiKey;
-    const response = await fetch(apiUrl, {
+    // मोफत, कोणत्याही API Key ची गरज नसलेला सुरक्षित AI API
+    const response = await fetch("https://text.pollinations.ai/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: promptText }] }]
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: "स्क्रीन: " + screenContext + "\nप्रश्न: " + userQuestion }
+        ],
+        model: "openai"
       })
     });
 
-    const data = await response.json();
+    const reply = await response.text();
 
-    if (data.candidates && data.candidates[0].content.parts[0].text) {
-      const reply = data.candidates[0].content.parts[0].text;
+    if (reply && reply.trim().length > 0) {
       resBox.innerText = reply;
-      status.innerText = "Gemini चे उत्तर:";
+      status.innerText = "AI चे उत्तर:";
       speakAnswer(reply);
-    } else if (data.error) {
-      resBox.innerText = "Google त्रुटी (" + data.error.code + "): " + data.error.message;
-      status.innerText = "त्रुटी आली!";
     } else {
-      resBox.innerText = "उत्तर मिळाले नाही: " + JSON.stringify(data);
+      resBox.innerText = "उत्तर मिळू शकले नाही, पुन्हा विचारून पहा.";
       status.innerText = "अडचण आली!";
     }
   } catch (err) {
-    resBox.innerText = "नेटवर्क किंवा ब्राऊझर एरर: " + err.message;
-    status.innerText = "एरर!";
+    resBox.innerText = "इंटरनेट किंवा सर्व्हर समस्या: " + err.message;
+    status.innerText = "त्रुटी आली!";
   }
 }
-
-
-function speakAnswer(text) {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(text);
     utt.lang = "mr-IN";
     window.speechSynthesis.speak(utt);
